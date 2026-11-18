@@ -11,7 +11,7 @@ Presentación HTML autocontenida de **16 diapositivas**, con estética editorial
 - [Integrante 3 · Paper y resultados](https://agustinberna.github.io/AA-slides/?integrante=3#s9) — diapositivas 9–12.
 - [Integrante 4 · Aplicaciones, RAG y conclusiones](https://agustinberna.github.io/AA-slides/?integrante=4#s13) — diapositivas 13–16.
 
-> **Activación inicial de GitHub Pages:** ir a [Settings → Pages](https://github.com/AgustinBerna/AA-slides/settings/pages) y configurar **Build and deployment → Source: GitHub Actions**. Luego entrar a [Actions](https://github.com/AgustinBerna/AA-slides/actions/workflows/pages.yml) y volver a ejecutar el workflow si es necesario. La dirección pública de arriba funcionará cuando termine el primer despliegue.
+> **Activación inicial de GitHub Pages:** entrá a [Settings → Pages](https://github.com/AgustinBerna/AA-slides/settings/pages), elegí **Source: Deploy from a branch**, **Branch: main**, carpeta **/(root)** y presioná **Save**. No hace falta GitHub Actions: GitHub Pages publicará automáticamente `index.html` y actualizará el sitio con futuros cambios en `main`.
 
 ### Uso
 
