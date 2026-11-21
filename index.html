@@ -295,20 +295,21 @@ svg text{font-family:Arial,Helvetica,sans-serif}
  <div class="visual"><div class="glass"><div class="art-kicker">Separar evidencia de hipótesis</div><div class="two-cards" style="margin-top:13px"><div style="border-color:#8c2e35"><h3 style="color:#8c2e35">✓ Observado</h3><p>La posición puede modificar el desempeño.</p></div><div style="border-color:#8c2e35"><h3 style="color:#8c2e35">? Por estudiar</h3><p>Qué mecanismos generan el efecto en cada modelo.</p></div></div><p style="margin-top:18px;font-size:15px">La magnitud depende de modelos, tareas y configuraciones.</p></div></div></div><div class="slide-foot"><span>Interpretación científica</span><span class="source"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al., 2024 ↗</a></span></div>
 </article>
 <!-- ===== INTEGRANTE 4: SLIDES 13–16 ===== -->
-<article class="slide" data-owner="4" data-time="0:30" data-note="El estudio encuentra un sesgo de posición: información al principio y al final suele aprovecharse mejor que en el medio. Las etiquetas primacía y recencia describen ese patrón, pero no revelan por sí solas su causa. Los autores exploraron arquitectura y entrenamiento: los modelos encoder–decoder resultaron más robustos dentro de longitudes vistas durante el entrenamiento, pero el sesgo reapareció fuera de ese rango. Por eso no sería correcto decir que la self-attention falla necesariamente o que hay un mecanismo único identificado." id="s13">
- <div class="slide-head"><span class="kicker">13 / Interpretación del fenómeno</span><span class="pill">Integrante 4 · 30 s</span></div>
- <div class="slide-main">
- <div class="copy"><h2>¿Por qué ocurre <span class="highlight">Lost in the Middle</span>?</h2><p><b>Primacía y recencia</b> describen dónde se aprovecha mejor la evidencia, no una causa única.</p><p class="lead">El entrenamiento, la arquitectura y la longitud de secuencia pueden influir.</p></div>
+<article class="slide" data-owner="4" data-time="0:50" data-note="En la sección cuatro del artículo, los autores investigaron tres posibles explicaciones de Lost in the Middle. La primera es la arquitectura: compararon modelos decoder-only con encoder–decoder. Estos últimos fueron más robustos con longitudes de contexto similares a las vistas durante el entrenamiento, pero volvieron a mostrar el sesgo cuando el contexto era más largo. La segunda es dónde aparece la pregunta: al colocarla tanto antes como después de los documentos, la recuperación de claves y valores mejoró muchísimo, aunque la mejora fue mínima para preguntas sobre múltiples documentos. La tercera es el ajuste fino con instrucciones: tanto el modelo base como su versión ajustada mostraron la curva en U, de modo que ese entrenamiento no es su única causa. Son tres factores explorados, pero el estudio no identifica una explicación causal definitiva." id="s13">
+ <div class="slide-head"><span class="kicker">13 / Tres factores investigados</span><span class="pill">Integrante 4 · 50 s</span></div>
+ <div class="slide-main"><div class="copy">
+ <h2>¿Por qué ocurre <span class="highlight">Lost in the Middle</span>?</h2>
+ <p>En la sección 4, Liu et al. ponen a prueba <b>tres posibles explicaciones</b> del sesgo posicional.</p>
+ <p class="lead">Las tres aportan pistas, pero <b>ninguna explica por sí sola</b> el fenómeno.</p>
+ </div>
  <div class="visual"><div class="editorial-viz">
- <div class="viz-eyebrow">Evidencia frente a explicación</div>
- <div class="cause-track" aria-label="Contexto con información al comienzo, en el medio y al final"><span>INICIO</span><span>MEDIO</span><span>FINAL</span></div>
- <div class="cause-points"><span>Primacía</span><span>Menor uso frecuente</span><span>Recencia</span></div>
- <div class="cause-separator"></div>
- <div class="cause-note"><b>Observación del paper</b><p>Sesgo por posición en varios modelos y tareas.</p></div>
- <div class="cause-note"><b>Hipótesis / factores</b><p>Arquitectura, entrenamiento y mecanismos posicionales; sin explicación causal única.</p></div>
- <p class="viz-disclaimer">Liu et al., 2024 · patrón frecuente, no universal</p>
+ <div class="viz-eyebrow">Tres investigaciones · resultados principales</div>
+ <div class="cause-note"><b>01 · Arquitectura</b><p><i>Encoder–decoder</i>: más robustos dentro de longitudes entrenadas; la curva en U reaparece al excederlas.</p></div>
+ <div class="cause-note"><b>02 · Posición de la pregunta</b><p>Pregunta antes y después: mejora mucho la recuperación clave–valor, pero poco las preguntas multidocumento.</p></div>
+ <div class="cause-note"><b>03 · Ajuste con instrucciones</b><p>El modelo base y el ajustado muestran sesgo: el <i>instruction fine-tuning</i> no es su causa única.</p></div>
+ <p class="viz-disclaimer">Hallazgos exploratorios · no establecen una causa única y definitiva.</p>
  </div></div></div>
- <div class="slide-foot"><span>Qué se observó ≠ por qué sucede</span><span class="source"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al. (2024) ↗</a></span></div>
+ <div class="slide-foot"><span>Arquitectura · query-aware · instruction fine-tuning</span><span class="source"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al., §4 ↗</a> · <a href="https://www.youtube.com/watch?v=EI897o5xOeE" target="_blank" rel="noopener">Video ↗</a></span></div>
 </article>
 <article class="slide" data-owner="4" data-time="0:35" data-note="El problema tiene implicancias concretas cuando un modelo analiza documentos extensos. Un dato relevante puede estar incluido y, sin embargo, no recuperarse al responder. Pensemos en una historia clínica larga: una alergia grave podría estar documentada en una evolución antigua. Con los botones movemos esa misma nota al principio, al medio y al final: el contenido no cambia, solo su posición. TIMER, en 2025, identificó sesgos temporales en tareas sobre registros clínicos longitudinales, aunque no evaluó específicamente errores al detectar alergias. La animación es ilustrativa, no una prueba de rendimiento clínico." id="s14">
  <div class="slide-head"><span class="kicker">14 / Implicancias del problema</span><span class="pill">Integrante 4 · 35 s</span></div>
