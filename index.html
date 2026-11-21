@@ -140,6 +140,56 @@ svg text{font-family:Arial,Helvetica,sans-serif}
  .slide{padding:50px}.slide-main{grid-template-columns:45% 55%}
 }
 
+
+/* Editor's interactive figures — section IV */
+.editorial-viz{width:100%;background:#f7f4ee;border:1px solid #bdb3a6;min-height:340px;padding:clamp(15px,1.9vw,29px);color:#2e2721}
+.viz-eyebrow{font:700 11px/1.35 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8c2e35;margin-bottom:14px}
+.viz-controls{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:17px}
+.viz-tab{border:1px solid #b5aba0;background:#f8f6f1;color:#484139;padding:8px 10px;border-radius:0;font:600 12px Arial,sans-serif;transition:background .28s,color .28s,transform .28s}
+.viz-tab:hover{background:#e9e2d8}
+.viz-tab.active{background:#852e36;color:#fff;border-color:#852e36}
+.viz-disclaimer{font:italic 12px/1.4 Georgia,serif;color:#766b60;margin:12px 0 0}
+.micro-caveat{font:italic clamp(13px,1.05vw,16px)/1.4 Georgia,serif!important;color:#706357!important;margin-top:10px!important}
+.cause-track{display:grid;grid-template-columns:repeat(3,1fr);height:92px;border:1px solid #c5b9ad;gap:2px;padding:3px;background:#f2eee6}
+.cause-track span{display:flex;justify-content:center;align-items:center;text-align:center;font:700 13px Arial,sans-serif;letter-spacing:.1em;background:#dacfc5;color:#713036}
+.cause-track span:nth-child(2){background:#e7e3db;color:#7b746c}
+.cause-points{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:9px;text-align:center;font:italic 14px Georgia,serif;color:#6b4c49}
+.cause-separator,.eval-rule{height:1px;background:#bcb2a6;margin:20px 0 14px}
+.cause-note{padding:8px 0;border-bottom:1px solid #ded7cc;display:grid;grid-template-columns:36% 64%;gap:8px;font:14px/1.35 Georgia,serif}
+.cause-note b{color:#8c2e35;font:700 12px/1.35 Arial,sans-serif;text-transform:uppercase;letter-spacing:.04em}
+.cause-note p{margin:0;color:#4d473f}
+.clinic-demo{position:relative}
+.clinic-question{font:italic 16px/1.4 Georgia,serif;color:#39302b;margin-bottom:14px}
+.clinic-stack{display:flex;flex-direction:column;gap:4px;min-height:224px;justify-content:flex-start}
+.clinic-item{width:100%;height:27px;min-height:27px;display:flex;align-items:center;border-left:3px solid #afa59a;background:#e9e4dc;color:#665b52;font:12px/1.2 Arial,sans-serif;letter-spacing:.005em;padding:4px 10px;overflow:hidden;white-space:nowrap;transition:opacity .55s ease,max-height .55s ease,height .55s ease,transform .55s ease,margin .55s ease,padding .55s ease,border-width .55s ease}
+.clinic-evidence{background:#ecdbd9;border-left-color:#8c2e35;color:#682e31;font-weight:800}
+.clinic-demo[data-mode="rag"] .clinic-distractor{opacity:.10;height:0;min-height:0;max-height:0;padding-top:0;padding-bottom:0;margin:0;border-width:0;transform:translateX(-25px)}
+.clinic-demo[data-mode="rag"] .clinic-evidence{transform:translateY(2px);height:60px;min-height:60px;font-size:14px}
+.clinic-demo[data-mode="rag"] .clinic-stack{min-height:224px}
+.clinic-result{padding:12px;border-top:1px solid #cbc1b5;font:italic 13px/1.5 Georgia,serif;color:#574a42;min-height:52px;margin-top:6px}
+.pipeline-line{display:flex;justify-content:space-between;align-items:flex-start;gap:4px;min-height:133px}
+.pipeline-doc{display:flex;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-width:0;min-height:94px;margin-top:13px;background:#e7e1d8;border:1px solid #c4b9ae;font:700 14px Arial,sans-serif;color:#665b54;transition:opacity .6s ease,transform .6s ease,order .6s ease,flex .6s ease,margin .6s ease}
+.pipeline-doc small{font:italic 12px Georgia,serif;color:#766c62}
+.pipeline-doc.relevant{background:#ead7d5;border-color:#9c4548;color:#8c2e35}
+.pipeline-doc.relevant small{color:#8c2e35}
+.pipeline-demo[data-mode="filter"] .pipeline-doc[data-kind="d"],
+.pipeline-demo[data-mode="rank"] .pipeline-doc[data-kind="d"],
+.pipeline-demo[data-mode="verify"] .pipeline-doc[data-kind="d"]{opacity:.13;transform:translateY(18px) scale(.86);flex:.28}
+.pipeline-demo[data-mode="rank"] .pipeline-doc.relevant:first-of-type,
+.pipeline-demo[data-mode="verify"] .pipeline-doc.relevant:first-of-type{order:-3;transform:translateY(-6px)}
+.pipeline-demo[data-mode="rank"] .pipeline-doc.relevant,
+.pipeline-demo[data-mode="verify"] .pipeline-doc.relevant{order:-2;transform:translateY(-6px)}
+.pipeline-summary{padding:11px 0;border-top:1px solid #bdb2a6;color:#483d35;font:14px/1.38 Georgia,serif;min-height:66px}
+.pipeline-summary b{color:#7e2a32}
+.verify-panel{display:flex;gap:6px;flex-wrap:wrap;max-height:0;overflow:hidden;opacity:0;transform:translateY(-5px);transition:max-height .55s,opacity .55s,transform .55s}
+.verify-panel span{border-bottom:1px solid #816e5e;color:#3e5342;font:11px Arial,sans-serif;padding:6px 4px}
+.pipeline-demo[data-mode="verify"] .verify-panel{max-height:90px;opacity:1;transform:translateY(0)}
+.eval-row{display:flex;align-items:baseline;gap:17px;border-bottom:1px solid #d6cec4;padding:19px 0;font:17px/1.25 Georgia,serif}
+.eval-number{font:700 12px Arial,sans-serif;color:#8c2e35;letter-spacing:.14em}
+@media(max-width:780px){.editorial-viz{min-height:320px;padding:13px}.clinic-item{height:26px;min-height:26px}.clinic-stack{min-height:202px}.pipeline-doc{min-height:82px}.eval-row{padding:12px 0;font-size:15px}.cause-track{height:60px}}
+@media(max-width:440px){.viz-controls{gap:3px}.viz-tab{font-size:10px;padding:7px 8px}.clinic-question{font-size:13px}.pipeline-doc{font-size:11px;min-height:60px}.pipeline-doc small{font-size:10px}.cause-note{font-size:12px}.cause-note b{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.clinic-item,.pipeline-doc,.verify-panel,.viz-tab{transition:none!important}}
+
 </style>
 </head>
 <body>
@@ -239,25 +289,89 @@ svg text{font-family:Arial,Helvetica,sans-serif}
  <div class="visual"><div class="glass"><div class="art-kicker">Separar evidencia de hipótesis</div><div class="two-cards" style="margin-top:13px"><div style="border-color:#8c2e35"><h3 style="color:#8c2e35">✓ Observado</h3><p>La posición puede modificar el desempeño.</p></div><div style="border-color:#8c2e35"><h3 style="color:#8c2e35">? Por estudiar</h3><p>Qué mecanismos generan el efecto en cada modelo.</p></div></div><p style="margin-top:18px;font-size:15px">La magnitud depende de modelos, tareas y configuraciones.</p></div></div></div><div class="slide-foot"><span>Interpretación científica</span><span class="source"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al., 2024 ↗</a></span></div>
 </article>
 <!-- ===== INTEGRANTE 4: SLIDES 13–16 ===== -->
-<article class="slide" data-owner="4" data-time="0:30" data-note="Conectar el fenómeno con problemas reales en lectura de historia clínica, informes extensos o normativas. El caso es inventado, no mide un modelo. El objetivo es mostrar la relevancia práctica." id="s13">
- <div class="slide-head"><span class="kicker">13 / Aplicación: documentos clínicos</span><span class="pill">Integrante 4 · 30 s</span></div>
- <div class="slide-main"><div class="copy"><h2>¿Y si el dato es <span class="highlight">clínicamente importante</span>?</h2><p>Una historia clínica extensa puede tener el dato decisivo entre decenas de notas.</p><p class="lead">Que el modelo reciba el documento completo no asegura que recupere esa evidencia.</p></div>
- <div class="visual"><div class="glass"><div class="art-kicker">Ejemplo ficticio</div><div style="display:grid;gap:8px;margin-top:15px"><div class="step" style="text-align:left;padding:10px 16px">Evoluciones anteriores · 2022–2024</div><div class="step" style="text-align:left;padding:10px 16px">Consultas y análisis · 2025</div><div class="step" style="text-align:left;padding:13px 16px;background:#eee0dd;border-color:#8c2e35;color:#632932">⚑ Alergia grave documentada · junio 2025</div><div class="step" style="text-align:left;padding:10px 16px">Evoluciones y controles · 2026</div><div class="step" style="text-align:left;padding:10px 16px">Resumen más reciente · 2026</div></div><div class="mini-title">Ejemplo didáctico; no representa una evaluación clínica.</div></div></div></div><div class="slide-foot"><span>Aplicación conceptual · salud</span><span class="source">Ejemplo ficticio</span></div>
+<article class="slide" data-owner="4" data-time="0:30" data-note="El estudio encuentra un sesgo de posición: información al principio y al final suele aprovecharse mejor que en el medio. Las etiquetas primacía y recencia describen ese patrón, pero no revelan por sí solas su causa. Los autores exploraron arquitectura y entrenamiento: los modelos encoder–decoder resultaron más robustos dentro de longitudes vistas durante el entrenamiento, pero el sesgo reapareció fuera de ese rango. Por eso no sería correcto decir que la self-attention falla necesariamente o que hay un mecanismo único identificado." id="s13">
+ <div class="slide-head"><span class="kicker">13 / Interpretación del fenómeno</span><span class="pill">Integrante 4 · 30 s</span></div>
+ <div class="slide-main">
+ <div class="copy"><h2>¿Por qué ocurre <span class="highlight">Lost in the Middle</span>?</h2><p><b>Primacía y recencia</b> describen dónde se aprovecha mejor la evidencia, no una causa única.</p><p class="lead">El entrenamiento, la arquitectura y la longitud de secuencia pueden influir.</p></div>
+ <div class="visual"><div class="editorial-viz">
+ <div class="viz-eyebrow">Evidencia frente a explicación</div>
+ <div class="cause-track" aria-label="Contexto con información al comienzo, en el medio y al final"><span>INICIO</span><span>MEDIO</span><span>FINAL</span></div>
+ <div class="cause-points"><span>Primacía</span><span>Menor uso frecuente</span><span>Recencia</span></div>
+ <div class="cause-separator"></div>
+ <div class="cause-note"><b>Observación del paper</b><p>Sesgo por posición en varios modelos y tareas.</p></div>
+ <div class="cause-note"><b>Hipótesis / factores</b><p>Arquitectura, entrenamiento y mecanismos posicionales; sin explicación causal única.</p></div>
+ <p class="viz-disclaimer">Liu et al., 2024 · patrón frecuente, no universal</p>
+ </div></div></div>
+ <div class="slide-foot"><span>Qué se observó ≠ por qué sucede</span><span class="source"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al. (2024) ↗</a></span></div>
 </article>
-<article class="slide" data-owner="4" data-time="0:30" data-note="RAG busca documentos o fragmentos relevantes para la pregunta, en lugar de adjuntar todo indiscriminadamente. No elimina por sí solo Lost in the Middle: depende de recuperación, ranking, segmentación y calidad de evidencia." id="s14">
- <div class="slide-head"><span class="kicker">14 / Aplicaciones en sistemas con LLM</span><span class="pill">Integrante 4 · 30 s</span></div>
- <div class="slide-main"><div class="copy"><h2>RAG: <span class="highlight">recuperar antes de responder</span></h2><p>Una estrategia es localizar los fragmentos más relevantes y construir un contexto más enfocado.</p><p>Reduce distractores, aunque <b>no garantiza</b> respuestas correctas.</p></div>
- <div class="visual"><div class="glass"><div class="art-title">Flujo simplificado de RAG</div><div style="display:grid;gap:10px"><div class="step" style="border-color:#a69c90">Pregunta del usuario</div><div style="text-align:center;color:#8c2e35;font-size:19px">↓</div><div class="step" style="border-color:#8c2e35">Buscar y seleccionar fragmentos relevantes</div><div style="text-align:center;color:#8c2e35;font-size:19px">↓</div><div class="step" style="border-color:#8c2e35">LLM + evidencia seleccionada</div><div style="text-align:center;color:#8c2e35;font-size:19px">↓</div><div class="step" style="border-color:#9d7460">Respuesta con respaldo verificable</div></div></div></div></div><div class="slide-foot"><span>Recuperación aumentada (RAG)</span><span class="source">Flujo conceptual</span></div>
+<article class="slide" data-owner="4" data-time="0:35" data-note="Pensemos en una historia clínica extensa. En una nota antigua, perdida entre evoluciones, figura una alergia grave. Aunque el modelo pueda recibir todas las notas, el experimento del paper nos advierte que eso no garantiza recuperar un dato situado en el medio. Una estrategia práctica es usar recuperación de fragmentos —por ejemplo, RAG— y seleccionar las notas que responden a una pregunta concreta, en vez de adjuntar toda la historia. En la animación, el documento relevante pasa de estar rodeado de distractores a figurar dentro de un contexto focalizado. Es una ilustración, no un experimento de precisión ni una garantía clínica." id="s14">
+ <div class="slide-head"><span class="kicker">14 / Aplicación a historias clínicas</span><span class="pill">Integrante 4 · 35 s</span></div>
+ <div class="slide-main">
+ <div class="copy"><h2>De leer <span class="highlight">todo</span> a recuperar lo <span class="highlight">pertinente</span></h2><p>Una alergia documentada puede quedar entre decenas de evoluciones.</p><p>Con <b>RAG</b>, el sistema busca los fragmentos relacionados con la pregunta antes de construir el contexto.</p><p class="micro-caveat">Atención: recuperar mal también puede omitir información crítica.</p></div>
+ <div class="visual"><div class="editorial-viz">
+ <div class="viz-eyebrow">Caso clínico ficticio · exploración interactiva</div>
+ <div class="viz-controls" role="group" aria-label="Modo de construir el contexto"><button type="button" class="viz-tab active" data-clinic-mode="full" aria-pressed="true">Historia completa</button><button type="button" class="viz-tab" data-clinic-mode="rag" aria-pressed="false">Contexto focalizado</button></div>
+ <div id="clinicDemo" class="clinic-demo" data-mode="full" aria-live="polite">
+ <div class="clinic-question">Pregunta: «¿Tiene antecedentes de alergias graves?»</div>
+ <div class="clinic-stack">
+ <div class="clinic-item clinic-distractor">Consulta de rutina</div>
+ <div class="clinic-item clinic-distractor">Control de laboratorio</div>
+ <div class="clinic-item clinic-distractor">Evolución previa</div>
+ <div class="clinic-item clinic-evidence">⚑ Alergia grave documentada</div>
+ <div class="clinic-item clinic-distractor">Interconsulta</div>
+ <div class="clinic-item clinic-distractor">Nota administrativa</div>
+ <div class="clinic-item clinic-distractor">Control reciente</div>
+ </div>
+ <div class="clinic-result" id="clinicResult">Contexto extenso: el dato está incluido, entre distractores.</div>
+ </div>
+ <p class="viz-disclaimer">Animación conceptual · no mide la exactitud de ningún LLM</p>
+ </div></div></div>
+ <div class="slide-foot"><span>Aplicación · RAG y selección de contexto</span><span class="source">Ejemplo ficticio, no consejo clínico</span></div>
 </article>
-<article class="slide" data-owner="4" data-time="0:25" data-note="Dar recomendaciones prácticas razonables sin presentarlas como curas generales: evaluar las posiciones, seleccionar y ordenar evidencia, dividir contextos muy extensos cuando proceda y pedir citas verificables. Evitar prometer que basta poner todo al principio." id="s15">
- <div class="slide-head"><span class="kicker">15 / Buenas prácticas</span><span class="pill">Integrante 4 · 25 s</span></div>
- <div class="slide-main"><div class="copy"><h2>Diseñar para el <span class="highlight">uso efectivo</span> del contexto</h2><p>No alcanza con aumentar el número máximo de tokens.</p><p class="lead">Importa qué información incluimos, dónde aparece y cómo evaluamos si fue utilizada.</p></div>
- <div class="visual"><div class="glass"><div class="art-kicker">Lista para diseñar y evaluar</div><div style="display:grid;gap:14px;margin-top:18px;font-size:18px"><div>✓ &nbsp; Recuperar evidencia pertinente</div><div>✓ &nbsp; Reducir distractores innecesarios</div><div>✓ &nbsp; Probar datos al inicio, medio y final</div><div>✓ &nbsp; Verificar la respuesta contra las fuentes</div></div><p style="margin-top:21px;font-size:14px">Son estrategias de diseño y evaluación, no garantías.</p></div></div></div><div class="slide-foot"><span>Implicancias prácticas</span><span class="source">Recomendaciones, no resultados medidos aquí</span></div>
+<article class="slide" data-owner="4" data-time="0:45" data-note="La mitigación no consiste simplemente en pegar la información importante al principio. Primero, recuperar y filtrar fragmentos relevantes para reducir distractores, procurando no perder evidencia. Segundo, reordenar o rerankear los resultados: los pasajes más pertinentes no deben quedar enterrados sin criterio en el centro. Tercero, exigir trazabilidad, contrastar las citas con la fuente y evaluar con datos clave al inicio, medio y final. El selector muestra cómo cambia el armado del contexto en cada etapa; los documentos son ficticios y no indican exactitud real. Resumir o comprimir puede ayudar a acortar el prompt, pero también descartar detalles necesarios, así que hay que medir el compromiso." id="s15">
+ <div class="slide-head"><span class="kicker">15 / Mitigación: tres decisiones de diseño</span><span class="pill">Integrante 4 · 45 s</span></div>
+ <div class="slide-main">
+ <div class="copy"><h2>Mitigar no es <span class="highlight">solo mover</span> el dato</h2><p><b>1.</b> Recuperar y filtrar evidencia relevante.</p><p><b>2.</b> Rerankear y ordenar los fragmentos elegidos.</p><p><b>3.</b> Verificar con fuentes y probar sensibilidad a la posición.</p><p class="micro-caveat">Comprimir puede reducir distractores, pero también perder detalles.</p></div>
+ <div class="visual"><div class="editorial-viz">
+ <div class="viz-eyebrow">Laboratorio de contexto · elegí una estrategia</div>
+ <div class="viz-controls" role="group" aria-label="Estrategia para mitigar Lost in the Middle">
+ <button type="button" class="viz-tab active" data-strategy="raw" aria-pressed="true">Sin filtrar</button>
+ <button type="button" class="viz-tab" data-strategy="filter" aria-pressed="false">Filtrar</button>
+ <button type="button" class="viz-tab" data-strategy="rank" aria-pressed="false">Reordenar</button>
+ <button type="button" class="viz-tab" data-strategy="verify" aria-pressed="false">Verificar</button>
+ </div>
+ <div class="pipeline-demo" id="pipelineDemo" data-mode="raw">
+ <div class="pipeline-line" aria-label="Documentos incluidos en el contexto">
+ <div class="pipeline-doc" data-kind="d">D1 <small>ruido</small></div>
+ <div class="pipeline-doc" data-kind="d">D2 <small>ruido</small></div>
+ <div class="pipeline-doc relevant" data-kind="r">R1 <small>útil</small></div>
+ <div class="pipeline-doc" data-kind="d">D3 <small>ruido</small></div>
+ <div class="pipeline-doc relevant" data-kind="r">R2 <small>útil</small></div>
+ <div class="pipeline-doc" data-kind="d">D4 <small>ruido</small></div>
+ </div>
+ <div class="pipeline-summary" id="pipelineSummary" aria-live="polite"><b>Sin selección:</b> documentos útiles y distractores conviven en un contexto largo.</div>
+ <div class="verify-panel" id="verifyPanel" aria-live="polite"><span>✓ Respuesta respaldada</span><span>✓ Cita a R1 / R2</span><span>✓ Comparar original</span></div>
+ </div>
+ <p class="viz-disclaimer">Esquema didáctico; sin puntajes ni mejoras de accuracy simulados</p>
+ </div></div></div>
+ <div class="slide-foot"><span>RAG · reranking · evaluación</span><span class="source">Estrategias a validar por tarea</span></div>
 </article>
-<article class="slide" data-owner="4" data-time="0:35" data-note="Cerrar con una frase memorable y dejar 2 referencias visibles para bibliografía. El integrante 4 puede integrar un mini-resumen de los 4 bloques. El tiempo total sugerido de esta versión es 8 minutos 25 segundos." id="s16">
- <div class="slide-head"><span class="kicker">16 / Conclusiones</span><span class="pill">Integrante 4 · 35 s</span></div>
- <div class="slide-main"><div class="copy"><h2>Más contexto <span class="highlight">≠</span> mejor comprensión</h2><p>La self-attention permite interacciones a larga distancia.</p><p>Lost in the Middle revela que el rendimiento puede depender de <b>dónde está la información</b>.</p><div class="quote">La pregunta no es solo cuánto contexto entra, sino cuánto contexto se utiliza.</div></div>
- <div class="visual"><div class="glass"><div class="art-kicker">Referencias principales</div><div style="margin-top:20px;display:grid;gap:14px"><div><strong>Liu et al. (2024)</strong><p style="font-size:15px;margin-top:4px">Lost in the Middle: How Language Models Use Long Contexts · TACL</p></div><div><strong>3Blue1Brown (2024)</strong><p style="font-size:15px;margin-top:4px">Attention in transformers, step-by-step</p></div></div><div class="refs"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Leer paper ↗</a><a href="https://www.3blue1brown.com/lessons/attention/" target="_blank" rel="noopener">Ver explicación ↗</a></div><div style="font-size:13px;color:#746a60;margin-top:24px">Video grupal · TP Aprendizaje Automático</div></div></div></div><div class="slide-foot"><span>Fin · bibliografía</span><span class="source">Duración total sugerida: 8 min 25 s</span></div>
+<article class="slide" data-owner="4" data-time="0:30" data-note="Para cerrar, conviene distinguir la capacidad nominal de la ventana del aprovechamiento real. Una aplicación robusta no se evalúa solo comprobando que la respuesta correcta figure en el prompt: hay que repetir la misma pregunta con la evidencia al comienzo, en el medio y al final; comparar aciertos, y verificar que las citas correspondan a la fuente. Las estrategias de recuperación, reordenamiento y verificación pueden ayudar, pero no hay garantía universal ni sustituyen la evaluación para cada modelo y tarea. La conclusión de Lost in the Middle es que más contexto disponible no significa que todo el contexto sea igualmente utilizable." id="s16">
+ <div class="slide-head"><span class="kicker">16 / Conclusión: medir, no suponer</span><span class="pill">Integrante 4 · 30 s</span></div>
+ <div class="slide-main">
+ <div class="copy"><h2>Una ventana más grande <span class="highlight">no garantiza</span> mejor uso</h2><p>La pregunta correcta no es solo «¿entra el documento?», sino «¿se aprovecha la evidencia, esté donde esté?».</p>
+ <div class="quote">Evaluar el mismo dato al inicio, en el medio y al final.</div>
+ </div>
+ <div class="visual"><div class="editorial-viz">
+ <div class="viz-eyebrow">Checklist de evaluación</div>
+ <div class="eval-row"><span class="eval-number">01</span><span>Misma pregunta; variar posición del dato</span></div>
+ <div class="eval-row"><span class="eval-number">02</span><span>Comparar aciertos y omisiones</span></div>
+ <div class="eval-row"><span class="eval-number">03</span><span>Validar citas y evidencia original</span></div>
+ <div class="eval-rule"></div>
+ <p style="font-family:Georgia,serif;font-size:19px;line-height:1.3;color:#2e2420;margin:14px 0">Más tokens disponibles ≠ información mejor utilizada.</p>
+ <div class="refs" style="margin-top:12px"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al., 2024 ↗</a><a href="https://arxiv.org/abs/2412.10079" target="_blank" rel="noopener">Investigación sobre mitigaciones ↗</a></div>
+ </div></div></div>
+ <div class="slide-foot"><span>Fin del bloque 4 · 2 min 20 s</span><span class="source">Fuentes científicas enlazadas</span></div>
 </article>
 </div>
 <div class="bottom"><div class="leftnav"><button class="navbtn" id="prev" aria-label="Diapositiva anterior">← Anterior</button><span id="counter" class="count">01 / 16</span><button class="navbtn" id="next" aria-label="Diapositiva siguiente">Siguiente →</button></div><div class="progress" aria-label="Progreso de la presentación"><span id="progressBar"></span></div><span class="help">← → navegar · N guion · F pantalla completa</span></div>
@@ -311,6 +425,31 @@ svg text{font-family:Arial,Helvetica,sans-serif}
     docDemo.querySelectorAll('.doc').forEach((d,i)=>{d.classList.toggle('relevant',i===k);d.textContent=i===k?'★ DATO':'D'+(i+1)});
     document.querySelectorAll('[data-pos]').forEach(b=>b.classList.toggle('selected',b===btn));
   }));
+
+  // Section IV: interactive conceptual application scenes. No fabricated performance measurements.
+  const clinicDemo=document.getElementById('clinicDemo'),clinicResult=document.getElementById('clinicResult');
+  document.querySelectorAll('[data-clinic-mode]').forEach(btn=>btn.addEventListener('click',()=>{
+    const mode=btn.dataset.clinicMode;
+    clinicDemo.dataset.mode=mode;
+    document.querySelectorAll('[data-clinic-mode]').forEach(b=>{const active=b===btn;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});
+    clinicResult.textContent=mode==='rag'
+      ?'Selección focalizada: la evidencia queda visible; hay que comprobar que no falte ninguna nota importante.'
+      :'Contexto extenso: el dato está incluido, entre distractores.';
+  }));
+  const pipelineDemo=document.getElementById('pipelineDemo'),pipelineSummary=document.getElementById('pipelineSummary');
+  const pipelineNotes={
+    raw:'<b>Sin selección:</b> documentos útiles y distractores conviven en un contexto largo.',
+    filter:'<b>Filtrar:</b> se retiran fragmentos menos pertinentes, conservando los relevantes.',
+    rank:'<b>Reordenar:</b> R1 y R2 pasan al comienzo de la lista según relevancia; no garantiza aciertos.',
+    verify:'<b>Verificar:</b> contrastar la respuesta con R1 y R2 y probar cambios de posición.'
+  };
+  document.querySelectorAll('[data-strategy]').forEach(btn=>btn.addEventListener('click',()=>{
+    const mode=btn.dataset.strategy;
+    pipelineDemo.dataset.mode=mode;
+    pipelineSummary.innerHTML=pipelineNotes[mode];
+    document.querySelectorAll('[data-strategy]').forEach(b=>{const active=b===btn;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});
+  }));
+
   render();
 })();
 </script>
