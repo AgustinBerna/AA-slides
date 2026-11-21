@@ -175,10 +175,11 @@ svg text{font-family:Arial,Helvetica,sans-serif}
 .pipeline-demo[data-mode="filter"] .pipeline-doc[data-kind="d"],
 .pipeline-demo[data-mode="rank"] .pipeline-doc[data-kind="d"],
 .pipeline-demo[data-mode="verify"] .pipeline-doc[data-kind="d"]{opacity:.13;transform:translateY(18px) scale(.86);flex:.28}
-.pipeline-demo[data-mode="rank"] .pipeline-doc.relevant:first-of-type,
-.pipeline-demo[data-mode="verify"] .pipeline-doc.relevant:first-of-type{order:-3;transform:translateY(-6px)}
-.pipeline-demo[data-mode="rank"] .pipeline-doc.relevant,
-.pipeline-demo[data-mode="verify"] .pipeline-doc.relevant{order:-2;transform:translateY(-6px)}
+/* Reordenamiento posicional: R1 al inicio, R2 al final y distractores en medio. */
+.pipeline-demo[data-mode="rank"] .pipeline-doc.relevant:nth-child(3),
+.pipeline-demo[data-mode="verify"] .pipeline-doc.relevant:nth-child(3){order:-2;transform:translateY(-6px)}
+.pipeline-demo[data-mode="rank"] .pipeline-doc.relevant:nth-child(5),
+.pipeline-demo[data-mode="verify"] .pipeline-doc.relevant:nth-child(5){order:2;transform:translateY(-6px)}
 .pipeline-summary{padding:11px 0;border-top:1px solid #bdb2a6;color:#483d35;font:14px/1.38 Georgia,serif;min-height:66px}
 .pipeline-summary b{color:#7e2a32}
 .verify-panel{display:flex;gap:6px;flex-wrap:wrap;max-height:0;overflow:hidden;opacity:0;transform:translateY(-5px);transition:max-height .55s,opacity .55s,transform .55s}
@@ -413,27 +414,27 @@ svg text{font-family:Arial,Helvetica,sans-serif}
  </div></div></div>
  <div class="slide-foot"><span>Implicancias · información y posición</span><span class="source"><a href="https://doi.org/10.1038/s41746-025-01965-9" target="_blank" rel="noopener">TIMER (2025) ↗</a> · <a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al. ↗</a></span></div>
 </article>
-<article class="slide" data-owner="4" data-time="0:30" data-note="Que un modelo pueda recibir más tokens no significa que pueda utilizar cada fragmento del contexto con la misma eficacia. La ventana de contexto indica capacidad de entrada, no comprensión garantizada. En Lost in the Middle, los autores movieron la evidencia relevante a distintas posiciones y observaron que varios modelos respondían peor cuando estaba en la parte central. Por lo tanto, ampliar la ventana no resuelve automáticamente el sesgo. Para evaluar un sistema deberíamos repetir la misma pregunta con la evidencia al inicio, medio y final, y contrastar las respuestas con sus fuentes." id="s15">
+<article class="slide" data-owner="4" data-time="0:30" data-note="Para medir Lost in the Middle no basta con indicar que un modelo admite muchos tokens. Primero mantenemos la misma pregunta y el mismo conjunto de documentos. Segundo cambiamos únicamente la posición de la evidencia relevante: comienzo, medio y final. Tercero medimos la exactitud de las respuestas para cada ubicación y cuantificamos cuánto cae el rendimiento en el medio. Ese procedimiento permite diagnosticar el sesgo sin confundirlo con cambios en el contenido. La capacidad de la ventana no garantiza el aprovechamiento de la información." id="s15">
  <div class="slide-head"><span class="kicker">15 / La limitación de ampliar el contexto</span><span class="pill">Integrante 4 · 30 s</span></div>
  <div class="slide-main">
  <div class="copy"><h2>Una ventana más grande <span class="highlight">no garantiza</span> mejor uso</h2><p>La pregunta correcta no es solo «¿entra el documento?», sino «¿se aprovecha la evidencia, esté donde esté?».</p>
  <div class="quote">Evaluar el mismo dato al inicio, en el medio y al final.</div>
  </div>
  <div class="visual"><div class="editorial-viz">
- <div class="viz-eyebrow">Checklist de evaluación</div>
- <div class="eval-row"><span class="eval-number">01</span><span>Misma pregunta; variar posición del dato</span></div>
- <div class="eval-row"><span class="eval-number">02</span><span>Comparar aciertos y omisiones</span></div>
- <div class="eval-row"><span class="eval-number">03</span><span>Validar citas y evidencia original</span></div>
+ <div class="viz-eyebrow">Cómo diagnosticar el sesgo posicional</div>
+ <div class="eval-row"><span class="eval-number">01</span><span>Mantener fija la pregunta y el contexto</span></div>
+ <div class="eval-row"><span class="eval-number">02</span><span>Mover la evidencia: inicio, medio y final</span></div>
+ <div class="eval-row"><span class="eval-number">03</span><span>Medir accuracy y cuantificar la caída central</span></div>
  <div class="eval-rule"></div>
  <p style="font-family:Georgia,serif;font-size:19px;line-height:1.3;color:#2e2420;margin:14px 0">Más tokens disponibles ≠ información mejor utilizada.</p>
  <div class="refs" style="margin-top:12px"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al., 2024 ↗</a><a href="https://arxiv.org/abs/2412.10079" target="_blank" rel="noopener">Investigación sobre mitigaciones ↗</a></div>
  </div></div></div>
  <div class="slide-foot"><span>Más tokens disponibles ≠ más evidencia aprovechada</span><span class="source">Fuentes científicas enlazadas</span></div>
 </article>
-<article class="slide" data-owner="4" data-time="0:50" data-note="Frente a Lost in the Middle hay varias estrategias que podemos combinar. Empezamos por un contexto sin filtrar: los fragmentos útiles están mezclados con distractores. RAG recupera primero la evidencia vinculada con la pregunta. También podemos filtrar redundancias y reordenar o rerankear los pasajes para priorizar lo pertinente. Finalmente, verificar significa comprobar la respuesta y las citas en las fuentes originales, además de evaluar la sensibilidad a la posición. En esta animación muestro cada opción con los botones. No estamos simulando precisión real ni existe una mejora garantizada: por ejemplo, RAG puede omitir evidencia si la recuperación falla." id="s16">
+<article class="slide" data-owner="4" data-time="0:50" data-note="Una vez diagnosticado el problema, podemos probar estrategias de mitigación. Sin filtrar, enviamos documentos útiles mezclados con distractores. RAG busca y selecciona fragmentos relacionados con la pregunta. Filtrar elimina ruido y redundancias, pero puede perder evidencia. Con reranking podemos estimar relevancia y experimentar con colocar los pasajes más útiles al principio y al final, dejando los secundarios en el medio: es una heurística inspirada en la curva en U de la diapositiva 11, no una solución garantizada; estudios posteriores hallaron que no siempre supera otros órdenes. Finalmente, verificar significa contrastar las afirmaciones y citas con los documentos originales. Otro compromiso es la compresión: resumir una historia clínica o contrato puede borrar justo una excepción o antecedente crítico. Los botones muestran efectos conceptuales, no mejoras medidas de accuracy. La estrategia debe evaluarse para cada modelo y tarea." id="s16">
  <div class="slide-head"><span class="kicker">16 / Estrategias para mitigar el problema</span><span class="pill">Integrante 4 · 50 s</span></div>
  <div class="slide-main">
- <div class="copy"><h2>¿Cómo podemos <span class="highlight">mitigar</span> el problema?</h2><p><b>RAG:</b> recuperar evidencia según la pregunta.</p><p><b>Filtrar y reordenar:</b> reducir ruido y priorizar fragmentos.</p><p><b>Verificar:</b> contrastar fuentes y evaluar el sesgo de posición.</p><p class="micro-caveat">Comprimir puede reducir distractores, pero también perder detalles.</p></div>
+ <div class="copy"><h2>¿Cómo podemos <span class="highlight">mitigar</span> el problema?</h2><p><b>RAG:</b> recuperar evidencia según la pregunta.</p><p><b>Filtrar y reordenar:</b> reducir ruido y probar evidencia relevante en los extremos.</p><p><b>Verificar:</b> comprobar las citas y la evidencia original.</p><p class="micro-caveat">Comprimir demasiado puede borrar excepciones o antecedentes críticos.</p></div>
  <div class="visual"><div class="editorial-viz">
  <div class="viz-eyebrow">Laboratorio de contexto · elegí una estrategia</div>
  <div class="viz-controls" role="group" aria-label="Estrategia para mitigar Lost in the Middle">
@@ -459,7 +460,7 @@ svg text{font-family:Arial,Helvetica,sans-serif}
  </div></div></div>
  <div class="slide-foot"><span>RAG · filtrado · reranking · verificación</span><span class="source"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13687758/" target="_blank" rel="noopener">RAG vs. contexto largo (2026) ↗</a></span></div>
 </article>
-<article class="slide" data-owner="4" data-time="0:25" data-note="En síntesis, Lost in the Middle muestra que no basta con proporcionar mucha información a un modelo: es necesario comprobar que pueda encontrar y aprovechar la evidencia dondequiera que se encuentre. RAG, el filtrado, el reordenamiento y la verificación pueden ayudar, pero no eliminan automáticamente el problema. Lo importante es evaluar la robustez del sistema con distintas posiciones de la información, no darla por supuesta. Muchas gracias." id="s17">
+<article class="slide" data-owner="4" data-time="0:25" data-note="En síntesis, la primera conclusión es que ampliar la ventana de contexto no garantiza que el modelo aproveche toda la información. Las estrategias de recuperación con RAG, filtrado, reordenamiento y verificación pueden ayudar, pero sus efectos no son universales y la compresión puede perder detalles importantes. Por eso, la robustez se demuestra midiendo qué ocurre cuando la evidencia cambia de posición, y comprobando las respuestas contra las fuentes. Muchas gracias." id="s17">
  <div class="slide-head"><span class="kicker">17 / Cierre</span><span class="pill">Integrante 4 · 25 s</span></div>
  <div class="slide-main">
  <div class="copy"><h2>La información puede estar <span class="highlight">ahí</span>… y aun así perderse</h2>
@@ -468,7 +469,7 @@ svg text{font-family:Arial,Helvetica,sans-serif}
  </div>
  <div class="visual"><div class="editorial-viz">
  <div class="viz-eyebrow">Tres ideas para llevarse</div>
- <div class="eval-row"><span class="eval-number">I</span><span>La posición de la evidencia importa.</span></div>
+ <div class="eval-row"><span class="eval-number">I</span><span>Ampliar la ventana de contexto no garantiza aprovechar toda la información.</span></div>
  <div class="eval-row"><span class="eval-number">II</span><span>RAG y el reranking ayudan, pero no garantizan.</span></div>
  <div class="eval-row"><span class="eval-number">III</span><span>La robustez se demuestra con evaluación.</span></div>
  <div class="eval-rule"></div>
@@ -555,8 +556,8 @@ svg text{font-family:Arial,Helvetica,sans-serif}
     rag:'<b>RAG:</b> recuperar y destacar los documentos relevantes para la pregunta; la búsqueda puede omitir información.',
     raw:'<b>Sin selección:</b> documentos útiles y distractores conviven en un contexto largo.',
     filter:'<b>Filtrar:</b> se retiran fragmentos menos pertinentes, conservando los relevantes.',
-    rank:'<b>Reordenar:</b> R1 y R2 pasan al comienzo de la lista según relevancia; no garantiza aciertos.',
-    verify:'<b>Verificar:</b> contrastar la respuesta con R1 y R2 y probar cambios de posición.'
+    rank:'<b>Reordenar:</b> R1 al inicio y R2 al final; distractores en el medio. Heurística posicional, sin mejora garantizada.',
+    verify:'<b>Verificar:</b> contrastar afirmaciones y citas con R1, R2 y los documentos originales.'
   };
   document.querySelectorAll('[data-strategy]').forEach(btn=>btn.addEventListener('click',()=>{
     const mode=btn.dataset.strategy;
