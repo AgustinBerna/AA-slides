@@ -196,6 +196,41 @@ svg text{font-family:Arial,Helvetica,sans-serif}
 .rag-flow span{color:#8c2e35;font-weight:800}
 .pipeline-demo[data-mode="rag"] .pipeline-doc[data-kind="d"]{opacity:.18;transform:translateY(14px) scale(.9)}
 .pipeline-demo[data-mode="rag"] .pipeline-doc.relevant{border-width:2px;transform:translateY(-8px) scale(1.02)}
+
+/* Diapositiva 13: exploración de cuatro factores, curvas esquemáticas sin cifras simuladas */
+#s13 .slide-main{grid-template-columns:41% 59%;gap:clamp(14px,2.1vw,30px)}
+#s13 .copy h2{font-size:clamp(32px,3.55vw,58px)}
+#s13 .copy p{font-size:clamp(15px,1.35vw,20px)}
+#s13 .copy .lead{font-size:clamp(16px,1.6vw,23px)}
+#s13 .poslab{padding:clamp(13px,1.4vw,22px);min-height:0}
+#s13 .pos-controls{margin-bottom:9px;gap:4px}
+#s13 .pos-controls .viz-tab{padding:7px 9px;font-size:clamp(10px,.83vw,12px)}
+#s13 .pos-panel{display:none;opacity:0}
+#s13 .pos-panel.active{display:block;animation:pos-panel-appear .4s ease-out both}
+#s13 .pos-panel-title{font-family:Georgia,serif;font-weight:600;color:#302620;font-size:clamp(16px,1.6vw,23px);margin:3px 0 9px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+#s13 .pos-panel-title span{font:italic 11px Georgia,serif;color:#8c2e35;white-space:nowrap}
+#s13 .pos-pipeline{display:flex;gap:9px;margin-bottom:7px;min-height:66px}
+#s13 .pos-pipe{flex:1;min-width:0;border:1px solid #c9bdb0;background:#f0eae1;padding:9px;display:flex;flex-direction:column;gap:5px;justify-content:center}
+#s13 .pos-pipe b{font:700 12px/1.15 Arial,sans-serif;color:#822e35}
+#s13 .pos-pipe span{font:12px/1.25 Georgia,serif;color:#55493d}
+#s13 .pos-pipeline-single .pos-pipe{align-items:center;text-align:center}
+#s13 .pos-chart-title{font:700 11px/1.3 Arial,sans-serif;letter-spacing:.03em;color:#51473f;margin-top:10px;margin-bottom:3px}
+#s13 .pos-chart-title small{font:italic 11px Georgia,serif;color:#85796e}
+#s13 .pos-chart{height:clamp(120px,12.8vw,179px);width:100%;max-height:179px;display:block;overflow:visible}
+#s13 .pos-axis text{font:10px Arial,sans-serif;fill:#85796e;letter-spacing:.07em}
+#s13 .pos-curve{stroke-dashoffset:0}
+#s13 .pos-panel.active .pos-curve{animation:pos-curve-draw .85s ease both}
+#s13 .pos-legend{display:flex;flex-wrap:wrap;gap:7px 14px;margin:0 0 12px;min-height:25px}
+#s13 .pos-legend span{display:inline-flex;align-items:center;gap:5px;color:#5b5148;font:11px/1.3 Arial,sans-serif}
+#s13 .pos-legend i{display:inline-block;width:14px;height:3px;flex:none}
+#s13 .pos-legend .pos-dash{height:0;border-top:3px dashed}
+#s13 .pos-takeaway{border-left:2px solid #8c2e35;padding:6px 0 6px 11px;font:italic clamp(12px,1vw,15px)/1.35 Georgia,serif;color:#493f37;min-height:39px}
+#s13 .pos-disclaimer{font-size:11px;margin-top:11px}
+@keyframes pos-panel-appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pos-curve-draw{from{stroke-dasharray:800;stroke-dashoffset:800}to{stroke-dasharray:800;stroke-dashoffset:0}}
+@media(max-width:800px){#s13 .slide-main{grid-template-columns:1fr;gap:6px}#s13 .pos-pipe span{font-size:10px}#s13 .poslab{padding:8px}#s13 .pos-controls{margin-bottom:4px}#s13 .pos-legend span{font-size:9px}}
+@media(prefers-reduced-motion:reduce){#s13 .pos-panel.active,#s13 .pos-panel.active .pos-curve{animation:none}}
+
 </style>
 </head>
 <body>
@@ -295,21 +330,56 @@ svg text{font-family:Arial,Helvetica,sans-serif}
  <div class="visual"><div class="glass"><div class="art-kicker">Separar evidencia de hipótesis</div><div class="two-cards" style="margin-top:13px"><div style="border-color:#8c2e35"><h3 style="color:#8c2e35">✓ Observado</h3><p>La posición puede modificar el desempeño.</p></div><div style="border-color:#8c2e35"><h3 style="color:#8c2e35">? Por estudiar</h3><p>Qué mecanismos generan el efecto en cada modelo.</p></div></div><p style="margin-top:18px;font-size:15px">La magnitud depende de modelos, tareas y configuraciones.</p></div></div></div><div class="slide-foot"><span>Interpretación científica</span><span class="source"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al., 2024 ↗</a></span></div>
 </article>
 <!-- ===== INTEGRANTE 4: SLIDES 13–16 ===== -->
-<article class="slide" data-owner="4" data-time="0:50" data-note="En la sección cuatro del artículo, los autores investigaron tres posibles explicaciones de Lost in the Middle. La primera es la arquitectura: compararon modelos decoder-only con encoder–decoder. Estos últimos fueron más robustos con longitudes de contexto similares a las vistas durante el entrenamiento, pero volvieron a mostrar el sesgo cuando el contexto era más largo. La segunda es dónde aparece la pregunta: al colocarla tanto antes como después de los documentos, la recuperación de claves y valores mejoró muchísimo, aunque la mejora fue mínima para preguntas sobre múltiples documentos. La tercera es el ajuste fino con instrucciones: tanto el modelo base como su versión ajustada mostraron la curva en U, de modo que ese entrenamiento no es su única causa. Son tres factores explorados, pero el estudio no identifica una explicación causal definitiva." id="s13">
- <div class="slide-head"><span class="kicker">13 / Tres factores investigados</span><span class="pill">Integrante 4 · 50 s</span></div>
- <div class="slide-main"><div class="copy">
- <h2>¿Por qué ocurre <span class="highlight">Lost in the Middle</span>?</h2>
+<article class="slide" data-owner="4" data-time="1:10" data-note="Los investigadores ponen a prueba tres posibles explicaciones del sesgo posicional. Primero, la arquitectura: en el estudio, los encoder–decoder fueron más robustos dentro de longitudes de contexto entrenadas, pero el sesgo reapareció con secuencias mayores. Segundo, la ubicación de la pregunta: repetirla antes y después de los documentos mejoró mucho la recuperación clave–valor, aunque apenas modificó las preguntas sobre varios documentos. Tercero, el ajuste con instrucciones: el modelo base y el ajustado seguían mostrando una caída central, así que ese ajuste no explica todo. Además, podemos considerar una cuarta hipótesis de literatura posterior: las regularidades y demandas de recuperación aprendidas durante el entrenamiento podrían favorecer los extremos. Este cuarto factor no es un experimento del paper de Liu. Los gráficos son conceptuales, no contienen datos ni porcentajes experimentales. En conjunto, todavía no hay una causa única demostrada." id="s13">
+ <div class="slide-head"><span class="kicker">13 / Explicaciones posibles</span><span class="pill">Integrante 4 · 1 min 10 s</span></div>
+ <div class="slide-main">
+ <div class="copy"><h2>¿Por qué ocurre <span class="highlight">Lost in the Middle</span>?</h2>
  <p>Los investigadores ponen a prueba <b>tres posibles explicaciones</b> del sesgo posicional.</p>
- <p class="lead">Las tres aportan pistas, pero <b>ninguna explica por sí sola</b> el fenómeno.</p>
+ <p class="lead">Sumamos una cuarta hipótesis: <b>sesgos aprendidos de las estadísticas del lenguaje y del entrenamiento</b>.</p>
+ <p class="micro-caveat">Elegí un factor para visualizar el mecanismo y la tendencia esperada de la accuracy.</p></div>
+ <div class="visual"><div class="editorial-viz poslab">
+ <div class="viz-eyebrow">Seleccioná una explicación · exploración interactiva</div>
+ <div class="viz-controls pos-controls" role="group" aria-label="Factores relacionados con el sesgo posicional">
+ <button type="button" class="viz-tab active" data-cause="architecture" aria-pressed="true">Arquitectura</button>
+ <button type="button" class="viz-tab" data-cause="query" aria-pressed="false">Pregunta</button>
+ <button type="button" class="viz-tab" data-cause="instructions" aria-pressed="false">Instrucciones</button>
+ <button type="button" class="viz-tab" data-cause="language" aria-pressed="false">Sesgo del lenguaje</button>
  </div>
- <div class="visual"><div class="editorial-viz">
- <div class="viz-eyebrow">Tres investigaciones · resultados principales</div>
- <div class="cause-note"><b>01 · Arquitectura</b><p><i>Encoder–decoder</i>: más robustos dentro de longitudes entrenadas; la curva en U reaparece al excederlas.</p></div>
- <div class="cause-note"><b>02 · Posición de la pregunta</b><p>Pregunta antes y después: mejora mucho la recuperación clave–valor, pero poco las preguntas multidocumento.</p></div>
- <div class="cause-note"><b>03 · Ajuste con instrucciones</b><p>El modelo base y el ajustado muestran sesgo: el <i>instruction fine-tuning</i> no es su causa única.</p></div>
- <p class="viz-disclaimer">Hallazgos exploratorios · no establecen una causa única y definitiva.</p>
+ <section class="pos-panel active" data-cause-panel="architecture" aria-hidden="false">
+ <h3 class="pos-panel-title">Arquitectura del modelo <span>Liu et al. · 2024</span></h3>
+ <div class="pos-pipeline"><div class="pos-pipe"><b>Decoder-only</b><span>Contexto + pregunta → respuesta</span></div><div class="pos-pipe"><b>Encoder–decoder</b><span>Codifica el contexto → genera respuesta</span></div></div>
+ <div class="pos-chart-title">Accuracy según posición <small>· curva conceptual</small></div>
+ <svg class="pos-chart" role="img" aria-label="Curvas esquemáticas: decoder-only muestra una caída, encoder-decoder es más estable dentro de longitudes vistas durante entrenamiento, pero puede mostrar una U al extrapolar" viewBox="0 0 485 173" preserveAspectRatio="xMidYMid meet"><g class="pos-axis"><path d="M48 12 V140 H464" fill="none" stroke="#aba296" stroke-width="1.4"/><path d="M48 78 H464" stroke="#dcd3c9" stroke-dasharray="3 5" stroke-width="1"/><text x="6" y="22">ALTA</text><text x="9" y="141">BAJA</text><text x="48" y="160">INICIO</text><text x="256" y="160" text-anchor="middle">MEDIO</text><text x="464" y="160" text-anchor="end">FINAL</text></g><path class="pos-curve" d="M50 43 C130 50 170 125 254 124 S380 49 461 44" fill="none" stroke="#8c2e35" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="none"/><path class="pos-curve" d="M50 45 C136 52 170 61 254 62 S377 52 461 48" fill="none" stroke="#4f7770" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="none"/><path class="pos-curve" d="M50 47 C130 55 174 106 254 103 S377 50 461 49" fill="none" stroke="#a57f4a" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="8 6"/></svg>
+ <div class="pos-legend"><span><i style="background:#8c2e35"></i>Decoder-only</span><span><i style="background:#4f7770"></i>Encoder–decoder</span><span><i class="pos-dash" style="border-color:#a57f4a"></i>Fuera de rango</span></div>
+ <div class="pos-takeaway">Encoder–decoder fue más estable dentro del rango entrenado; no elimina el sesgo fuera de él.</div>
+ </section>
+<section class="pos-panel" data-cause-panel="query" aria-hidden="true">
+ <h3 class="pos-panel-title">Posición de la pregunta <span>Liu et al. · 2024</span></h3>
+ <div class="pos-pipeline"><div class="pos-pipe"><b>Consulta una vez</b><span>Pregunta → documentos</span></div><div class="pos-pipe"><b>Consulta repetida</b><span>Pregunta → documentos → pregunta</span></div></div>
+ <div class="pos-chart-title">Accuracy según posición <small>· curva conceptual</small></div>
+ <svg class="pos-chart" role="img" aria-label="Curvas ilustrativas: consulta una vez frente a consulta repetida para recuperación clave-valor. No describe resultados en preguntas multidocumento" viewBox="0 0 485 173" preserveAspectRatio="xMidYMid meet"><g class="pos-axis"><path d="M48 12 V140 H464" fill="none" stroke="#aba296" stroke-width="1.4"/><path d="M48 78 H464" stroke="#dcd3c9" stroke-dasharray="3 5" stroke-width="1"/><text x="6" y="22">ALTA</text><text x="9" y="141">BAJA</text><text x="48" y="160">INICIO</text><text x="256" y="160" text-anchor="middle">MEDIO</text><text x="464" y="160" text-anchor="end">FINAL</text></g><path class="pos-curve" d="M50 43 C130 50 170 125 254 124 S380 49 461 44" fill="none" stroke="#8c2e35" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="none"/><path class="pos-curve" d="M50 47 C123 49 171 56 254 53 S370 47 461 44" fill="none" stroke="#4f7770" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="none"/></svg>
+ <div class="pos-legend"><span><i style="background:#8c2e35"></i>Pregunta una vez</span><span><i style="background:#4f7770"></i>Repetida · clave–valor</span></div>
+ <div class="pos-takeaway">Repetir la pregunta mejoró mucho clave–valor, pero poco la respuesta multidocumento.</div>
+ </section>
+<section class="pos-panel" data-cause-panel="instructions" aria-hidden="true">
+ <h3 class="pos-panel-title">Ajuste con instrucciones <span>Liu et al. · 2024</span></h3>
+ <div class="pos-pipeline"><div class="pos-pipe"><b>Modelo base</b><span>Preentrenamiento</span></div><div class="pos-pipe"><b>Instruction-tuned</b><span>Preentrenamiento + ajuste</span></div></div>
+ <div class="pos-chart-title">Accuracy según posición <small>· curva conceptual</small></div>
+ <svg class="pos-chart" role="img" aria-label="Curvas esquemáticas en U para modelo base y versión ajustada con instrucciones" viewBox="0 0 485 173" preserveAspectRatio="xMidYMid meet"><g class="pos-axis"><path d="M48 12 V140 H464" fill="none" stroke="#aba296" stroke-width="1.4"/><path d="M48 78 H464" stroke="#dcd3c9" stroke-dasharray="3 5" stroke-width="1"/><text x="6" y="22">ALTA</text><text x="9" y="141">BAJA</text><text x="48" y="160">INICIO</text><text x="256" y="160" text-anchor="middle">MEDIO</text><text x="464" y="160" text-anchor="end">FINAL</text></g><path class="pos-curve" d="M50 43 C130 50 170 125 254 124 S380 49 461 44" fill="none" stroke="#8c2e35" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="none"/><path class="pos-curve" d="M50 58 C130 65 168 110 254 107 S382 58 461 55" fill="none" stroke="#4f7770" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="none"/></svg>
+ <div class="pos-legend"><span><i style="background:#8c2e35"></i>Modelo base</span><span><i style="background:#4f7770"></i>Ajustado</span></div>
+ <div class="pos-takeaway">Ambos conservaron sesgo posicional: el ajuste con instrucciones no es su causa única.</div>
+ </section>
+<section class="pos-panel" data-cause-panel="language" aria-hidden="true">
+ <h3 class="pos-panel-title">Regularidades del lenguaje y del entrenamiento <span>Hipótesis adicional · 2025</span></h3>
+ <div class="pos-pipeline pos-pipeline-single"><div class="pos-pipe"><b>Datos y demandas de recuperación</b><span>Predicción de tokens · memoria reciente y distante → preferencias aprendidas</span></div></div>
+ <div class="pos-chart-title">Accuracy según posición <small>· curva conceptual</small></div>
+ <svg class="pos-chart" role="img" aria-label="Hipótesis conceptual: sesgo de primacía y recencia que puede emerger de regularidades y tareas de recuperación durante el entrenamiento; no es la cuarta prueba del estudio de Liu" viewBox="0 0 485 173" preserveAspectRatio="xMidYMid meet"><g class="pos-axis"><path d="M48 12 V140 H464" fill="none" stroke="#aba296" stroke-width="1.4"/><path d="M48 78 H464" stroke="#dcd3c9" stroke-dasharray="3 5" stroke-width="1"/><text x="6" y="22">ALTA</text><text x="9" y="141">BAJA</text><text x="48" y="160">INICIO</text><text x="256" y="160" text-anchor="middle">MEDIO</text><text x="464" y="160" text-anchor="end">FINAL</text></g><path class="pos-curve" d="M50 43 C130 50 170 125 254 124 S380 49 461 44" fill="none" stroke="#a57f4a" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="8 6"/></svg>
+ <div class="pos-legend"><span><i class="pos-dash" style="border-color:#a57f4a"></i>Patrón posible · hipótesis</span></div>
+ <div class="pos-takeaway">Estudios posteriores muestran que las demandas de recuperación durante el entrenamiento pueden generar la curva en U.</div>
+ </section>
+ <p class="viz-disclaimer pos-disclaimer">Ilustraciones sin escala numérica; no reproducen valores medidos ni las figuras originales.</p>
  </div></div></div>
- <div class="slide-foot"><span>Arquitectura · query-aware · instruction fine-tuning</span><span class="source"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al., §4 ↗</a> · <a href="https://www.youtube.com/watch?v=EI897o5xOeE" target="_blank" rel="noopener">Video ↗</a></span></div>
+ <div class="slide-foot"><span>Tres pruebas originales + una hipótesis posterior</span><span class="source"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al. (2024) ↗</a> · <a href="https://arxiv.org/abs/2510.10276" target="_blank" rel="noopener">Explicación emergente (2025) ↗</a></span></div>
 </article>
 <article class="slide" data-owner="4" data-time="0:35" data-note="El problema tiene implicancias concretas cuando un modelo analiza documentos extensos. Un dato relevante puede estar incluido y, sin embargo, no recuperarse al responder. Pensemos en una historia clínica larga: una alergia grave podría estar documentada en una evolución antigua. Con los botones movemos esa misma nota al principio, al medio y al final: el contenido no cambia, solo su posición. TIMER, en 2025, identificó sesgos temporales en tareas sobre registros clínicos longitudinales, aunque no evaluó específicamente errores al detectar alergias. La animación es ilustrativa, no una prueba de rendimiento clínico." id="s14">
  <div class="slide-head"><span class="kicker">14 / Implicancias del problema</span><span class="pill">Integrante 4 · 35 s</span></div>
@@ -493,6 +563,22 @@ svg text{font-family:Arial,Helvetica,sans-serif}
     pipelineDemo.dataset.mode=mode;
     pipelineSummary.innerHTML=pipelineNotes[mode];
     document.querySelectorAll('[data-strategy]').forEach(b=>{const active=b===btn;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});
+  }));
+
+
+  // Slide 13: cambia el mecanismo y el gráfico, sin simular datos experimentales.
+  document.querySelectorAll('[data-cause]').forEach(btn=>btn.addEventListener('click',()=>{
+    const choice=btn.dataset.cause;
+    document.querySelectorAll('[data-cause]').forEach(other=>{
+      const selected=other===btn;
+      other.classList.toggle('active',selected);
+      other.setAttribute('aria-pressed',String(selected));
+    });
+    document.querySelectorAll('[data-cause-panel]').forEach(panel=>{
+      const show=panel.dataset.causePanel===choice;
+      panel.classList.toggle('active',show);
+      panel.setAttribute('aria-hidden',String(!show));
+    });
   }));
 
   render();
