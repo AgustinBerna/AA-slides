@@ -190,6 +190,12 @@ svg text{font-family:Arial,Helvetica,sans-serif}
 @media(max-width:440px){.viz-controls{gap:3px}.viz-tab{font-size:10px;padding:7px 8px}.clinic-question{font-size:13px}.pipeline-doc{font-size:11px;min-height:60px}.pipeline-doc small{font-size:10px}.cause-note{font-size:12px}.cause-note b{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.clinic-item,.pipeline-doc,.verify-panel,.viz-tab{transition:none!important}}
 
+
+/* RAG flow: editorial line above the clinical interaction */
+.rag-flow{font:600 clamp(10px,1vw,13px)/1.4 Arial,Helvetica,sans-serif;display:flex;align-items:center;gap:5px;flex-wrap:wrap;padding:5px 0 10px;margin:0 0 8px;border-bottom:1px solid #d3c8bc;color:#493d37}
+.rag-flow span{color:#8c2e35;font-weight:800}
+.pipeline-demo[data-mode="rag"] .pipeline-doc[data-kind="d"]{opacity:.18;transform:translateY(14px) scale(.9)}
+.pipeline-demo[data-mode="rag"] .pipeline-doc.relevant{border-width:2px;transform:translateY(-8px) scale(1.02)}
 </style>
 </head>
 <body>
@@ -304,13 +310,13 @@ svg text{font-family:Arial,Helvetica,sans-serif}
  </div></div></div>
  <div class="slide-foot"><span>Qué se observó ≠ por qué sucede</span><span class="source"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al. (2024) ↗</a></span></div>
 </article>
-<article class="slide" data-owner="4" data-time="0:35" data-note="Pensemos en una historia clínica extensa. Una alergia importante puede quedar entre decenas de evoluciones. Esta preocupación tiene respaldo en estudios clínicos: Cui y colaboradores, en TIMER, analizaron registros longitudinales y hallaron que las preguntas generadas por modelos se apoyaban más en los extremos temporales que en los períodos centrales. Ojo: es un sesgo en la distribución de evidencia, no una medición directa de errores al detectar alergias. Además, un trabajo de 2026 comparó RAG con contextos largos sobre notas hospitalarias reales y halló ventajas de RAG en ciertas tareas de extracción, con menos tokens. Al pulsar 'Contexto focalizado', vemos la idea de recuperar la nota pertinente en lugar de enviar todo el registro. La animación es ilustrativa: ningún método garantiza que no se pierda información clínica." id="s14">
+<article class="slide" data-owner="4" data-time="0:35" data-note="Pensemos en una historia clínica longitudinal: una alergia grave puede figurar en una nota antigua, entre decenas de evoluciones. El estudio TIMER (2025) describió sesgos temporales al generar preguntas sobre registros longitudinales, aunque no evaluó específicamente omisiones de alergias. RAG —generación aumentada por recuperación— propone una solución práctica: primero recuperar los fragmentos relacionados con la pregunta, después enviar esa evidencia acotada al modelo para producir una respuesta respaldada por fuentes. En la animación pueden comparar enviar toda la historia con utilizar RAG. Otro trabajo clínico (2026) comparó RAG frente a contextos largos y encontró ventajas en algunas tareas, no en todas. Si la recuperación omite la nota importante, RAG también falla: siempre debemos comprobar la evidencia. id="s14">
  <div class="slide-head"><span class="kicker">14 / Aplicación a historias clínicas</span><span class="pill">Integrante 4 · 45 s</span></div>
  <div class="slide-main">
- <div class="copy"><h2>De leer <span class="highlight">todo</span> a recuperar lo <span class="highlight">pertinente</span></h2><p><b>TIMER (2025)</b> halló sesgo hacia los extremos temporales al generar preguntas sobre registros longitudinales.</p><p>En notas clínicas reales, <b>RAG</b> mostró ventajas frente a contextos largos en algunas tareas de extracción (2026).</p><p class="micro-caveat">Atención: recuperar mal también puede omitir información crítica.</p></div>
+ <div class="copy"><h2><span class="highlight">RAG</span>: recuperar antes de responder</h2><p><b>RAG</b> busca notas relevantes y las incorpora como evidencia, en lugar de enviar toda la historia clínica.</p><p><b>Evidencia:</b> TIMER (2025) describe sesgos temporales; un estudio de 2026 comparó RAG y contexto largo en notas clínicas.</p><p class="micro-caveat">Atención: recuperar mal también puede omitir información crítica.</p></div>
  <div class="visual"><div class="editorial-viz">
- <div class="viz-eyebrow">Caso clínico ficticio · exploración interactiva</div>
- <div class="viz-controls" role="group" aria-label="Modo de construir el contexto"><button type="button" class="viz-tab active" data-clinic-mode="full" aria-pressed="true">Historia completa</button><button type="button" class="viz-tab" data-clinic-mode="rag" aria-pressed="false">Contexto focalizado</button></div>
+ <div class="viz-eyebrow">Historia clínica ficticia · estrategia RAG</div><div class="rag-flow" aria-label="Etapas de RAG">Pregunta <span>→</span> Recuperar <span>→</span> Seleccionar <span>→</span> Responder</div>
+ <div class="viz-controls" role="group" aria-label="Modo de construir el contexto"><button type="button" class="viz-tab active" data-clinic-mode="full" aria-pressed="true">Historia completa</button><button type="button" class="viz-tab" data-clinic-mode="rag" aria-pressed="false">Con RAG</button></div>
  <div id="clinicDemo" class="clinic-demo" data-mode="full" aria-live="polite">
  <div class="clinic-question">Pregunta: «¿Tiene antecedentes de alergias graves?»</div>
  <div class="clinic-stack">
@@ -328,14 +334,15 @@ svg text{font-family:Arial,Helvetica,sans-serif}
  </div></div></div>
  <div class="slide-foot"><span>Aplicación · RAG y selección de contexto</span><span class="source">Fuentes: <a href="https://doi.org/10.1038/s41746-025-01965-9" target="_blank" rel="noopener">Cui et al., TIMER (2025) ↗</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13687758/" target="_blank" rel="noopener">EHR / RAG (2026) ↗</a></span></div>
 </article>
-<article class="slide" data-owner="4" data-time="0:45" data-note="La mitigación no consiste simplemente en pegar la información importante al principio. Primero, recuperar y filtrar fragmentos relevantes para reducir distractores, procurando no perder evidencia. Segundo, reordenar o rerankear los resultados: los pasajes más pertinentes no deben quedar enterrados sin criterio en el centro. Tercero, exigir trazabilidad, contrastar las citas con la fuente y evaluar con datos clave al inicio, medio y final. El selector muestra cómo cambia el armado del contexto en cada etapa; los documentos son ficticios y no indican exactitud real. Resumir o comprimir puede ayudar a acortar el prompt, pero también descartar detalles necesarios, así que hay que medir el compromiso." id="s15">
+<article class="slide" data-owner="4" data-time="0:45" data-note="No hay una única solución. En esta animación mostramos cinco estados para explicar medidas concretas. Sin filtrar, todos los documentos compiten en un contexto largo. RAG busca y destaca los fragmentos pertinentes según la pregunta. Filtrar reduce distractores o pasajes redundantes, con el riesgo de excluir evidencia válida. Reordenar o rerankear prioriza R1 y R2 dentro del contexto seleccionado, aunque moverlos no garantiza el resultado. Finalmente verificar significa contrastar citas y datos con los originales y probar la misma información al inicio, medio y final. Cada botón cambia la visualización conceptual; no representan cambios medidos de accuracy. En un sistema real debemos evaluar la calidad de la recuperación y del resultado final. id="s15">
  <div class="slide-head"><span class="kicker">15 / Mitigación: tres decisiones de diseño</span><span class="pill">Integrante 4 · 45 s</span></div>
  <div class="slide-main">
- <div class="copy"><h2>Mitigar no es <span class="highlight">solo mover</span> el dato</h2><p><b>1.</b> Recuperar y filtrar evidencia relevante.</p><p><b>2.</b> Rerankear y ordenar los fragmentos elegidos.</p><p><b>3.</b> Verificar con fuentes y probar sensibilidad a la posición.</p><p class="micro-caveat">Comprimir puede reducir distractores, pero también perder detalles.</p></div>
+ <div class="copy"><h2>Mitigar no es <span class="highlight">solo mover</span> el dato</h2><p><b>1. RAG:</b> recuperar evidencia según la pregunta.</p><p><b>2. Filtrar y reordenar:</b> reducir ruido, priorizar lo relevante.</p><p><b>3. Verificar:</b> contrastar fuentes y medir sesgos de posición.</p><p class="micro-caveat">Comprimir puede reducir distractores, pero también perder detalles.</p></div>
  <div class="visual"><div class="editorial-viz">
  <div class="viz-eyebrow">Laboratorio de contexto · elegí una estrategia</div>
  <div class="viz-controls" role="group" aria-label="Estrategia para mitigar Lost in the Middle">
  <button type="button" class="viz-tab active" data-strategy="raw" aria-pressed="true">Sin filtrar</button>
+ <button type="button" class="viz-tab" data-strategy="rag" aria-pressed="false">RAG</button>
  <button type="button" class="viz-tab" data-strategy="filter" aria-pressed="false">Filtrar</button>
  <button type="button" class="viz-tab" data-strategy="rank" aria-pressed="false">Reordenar</button>
  <button type="button" class="viz-tab" data-strategy="verify" aria-pressed="false">Verificar</button>
@@ -354,10 +361,10 @@ svg text{font-family:Arial,Helvetica,sans-serif}
  </div>
  <p class="viz-disclaimer">Esquema didáctico; sin puntajes ni mejoras de accuracy simulados</p>
  </div></div></div>
- <div class="slide-foot"><span>RAG · reranking · evaluación</span><span class="source">Estrategias a validar por tarea</span></div>
+ <div class="slide-foot"><span>RAG · filtrado · reranking · verificación</span><span class="source">Estrategias a validar por tarea</span></div>
 </article>
 <article class="slide" data-owner="4" data-time="0:30" data-note="Para cerrar, conviene distinguir la capacidad nominal de la ventana del aprovechamiento real. Una aplicación robusta no se evalúa solo comprobando que la respuesta correcta figure en el prompt: hay que repetir la misma pregunta con la evidencia al comienzo, en el medio y al final; comparar aciertos, y verificar que las citas correspondan a la fuente. Las estrategias de recuperación, reordenamiento y verificación pueden ayudar, pero no hay garantía universal ni sustituyen la evaluación para cada modelo y tarea. La conclusión de Lost in the Middle es que más contexto disponible no significa que todo el contexto sea igualmente utilizable." id="s16">
- <div class="slide-head"><span class="kicker">16 / Conclusión: medir, no suponer</span><span class="pill">Integrante 4 · 30 s</span></div>
+ <div class="slide-head"><span class="kicker">16 / Evaluación: medir, no suponer</span><span class="pill">Integrante 4 · 30 s</span></div>
  <div class="slide-main">
  <div class="copy"><h2>Una ventana más grande <span class="highlight">no garantiza</span> mejor uso</h2><p>La pregunta correcta no es solo «¿entra el documento?», sino «¿se aprovecha la evidencia, esté donde esté?».</p>
  <div class="quote">Evaluar el mismo dato al inicio, en el medio y al final.</div>
@@ -371,10 +378,29 @@ svg text{font-family:Arial,Helvetica,sans-serif}
  <p style="font-family:Georgia,serif;font-size:19px;line-height:1.3;color:#2e2420;margin:14px 0">Más tokens disponibles ≠ información mejor utilizada.</p>
  <div class="refs" style="margin-top:12px"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al., 2024 ↗</a><a href="https://arxiv.org/abs/2412.10079" target="_blank" rel="noopener">Investigación sobre mitigaciones ↗</a></div>
  </div></div></div>
- <div class="slide-foot"><span>Fin del bloque 4 · 2 min 20 s</span><span class="source">Fuentes científicas enlazadas</span></div>
+ <div class="slide-foot"><span>Evaluar sensibilidad a la posición</span><span class="source">Fuentes científicas enlazadas</span></div>
+</article>
+<article class="slide" data-owner="4" data-time="0:25" data-note="El mensaje final de Lost in the Middle es que el tamaño nominal de una ventana mide cuánta información puede ingresar, no cuánto de esa información se usa efectivamente. En situaciones reales, podemos combinar recuperación con RAG, reducción de distractores, reranking y comprobación contra las fuentes. Sin embargo, ninguna medida garantiza por sí sola respuestas correctas. Es fundamental evaluar cómo cambia el rendimiento al mover la evidencia dentro del contexto. En definitiva, no basta con que el dato esté presente: importa que el sistema pueda encontrarlo, usarlo y justificar su respuesta." id="s17">
+ <div class="slide-head"><span class="kicker">17 / Cierre</span><span class="pill">Integrante 4 · 25 s</span></div>
+ <div class="slide-main">
+ <div class="copy"><h2>La información puede estar <span class="highlight">ahí</span>… y aun así perderse</h2>
+ <p class="lead">El desafío es <b>recuperarla, utilizarla y verificarla</b>, independientemente de su posición.</p>
+ <div class="quote">Más contexto disponible ≠ mejor uso del contexto.</div>
+ </div>
+ <div class="visual"><div class="editorial-viz">
+ <div class="viz-eyebrow">Tres ideas para llevarse</div>
+ <div class="eval-row"><span class="eval-number">I</span><span>La posición de la evidencia importa.</span></div>
+ <div class="eval-row"><span class="eval-number">II</span><span>RAG y el reranking ayudan, pero no garantizan.</span></div>
+ <div class="eval-row"><span class="eval-number">III</span><span>La robustez se demuestra con evaluación.</span></div>
+ <div class="eval-rule"></div>
+ <p style="font-family:Georgia,serif;font-size:clamp(18px,2vw,27px);color:#852e36;margin:16px 0">¿Lo recuerda o solo lo recibió?</p>
+ <div class="refs"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al. (2024) ↗</a></div>
+ </div></div>
+ </div>
+ <div class="slide-foot"><span>Gracias · Fin del trabajo</span><span class="source">TP Aprendizaje Automático</span></div>
 </article>
 </div>
-<div class="bottom"><div class="leftnav"><button class="navbtn" id="prev" aria-label="Diapositiva anterior">← Anterior</button><span id="counter" class="count">01 / 16</span><button class="navbtn" id="next" aria-label="Diapositiva siguiente">Siguiente →</button></div><div class="progress" aria-label="Progreso de la presentación"><span id="progressBar"></span></div><span class="help">← → navegar · N guion · F pantalla completa</span></div>
+<div class="bottom"><div class="leftnav"><button class="navbtn" id="prev" aria-label="Diapositiva anterior">← Anterior</button><span id="counter" class="count">01 / 17</span><button class="navbtn" id="next" aria-label="Diapositiva siguiente">Siguiente →</button></div><div class="progress" aria-label="Progreso de la presentación"><span id="progressBar"></span></div><span class="help">← → navegar · N guion · F pantalla completa</span></div>
 <aside id="notes" class="notes" aria-live="polite"><b>Guion sugerido</b><p id="noteText"></p></aside>
 </div>
 <script>
@@ -433,11 +459,12 @@ svg text{font-family:Arial,Helvetica,sans-serif}
     clinicDemo.dataset.mode=mode;
     document.querySelectorAll('[data-clinic-mode]').forEach(b=>{const active=b===btn;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});
     clinicResult.textContent=mode==='rag'
-      ?'Selección focalizada: la evidencia queda visible; hay que comprobar que no falte ninguna nota importante.'
+      ?'Con RAG: se destaca la nota recuperada; hay que comprobar que no falten otras notas importantes.'
       :'Contexto extenso: el dato está incluido, entre distractores.';
   }));
   const pipelineDemo=document.getElementById('pipelineDemo'),pipelineSummary=document.getElementById('pipelineSummary');
   const pipelineNotes={
+    rag:'<b>RAG:</b> recuperar y destacar los documentos relevantes para la pregunta; la búsqueda puede omitir información.',
     raw:'<b>Sin selección:</b> documentos útiles y distractores conviven en un contexto largo.',
     filter:'<b>Filtrar:</b> se retiran fragmentos menos pertinentes, conservando los relevantes.',
     rank:'<b>Reordenar:</b> R1 y R2 pasan al comienzo de la lista según relevancia; no garantiza aciertos.',
