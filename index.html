@@ -251,6 +251,37 @@ svg text{font-family:Arial,Helvetica,sans-serif}
 #s13 .pos-kv-example p{margin:3px 0 0;color:#71665c;font:italic 10px/1.3 Georgia,serif}
 @media(max-width:700px){#s13 .pos-query-comparison{grid-template-columns:minmax(0,1.4fr) minmax(118px,.9fr);gap:6px}#s13 .pos-kv-example{padding:6px}#s13 .pos-kv-pair{font-size:10px}#s13 .pos-kv-question{font-size:10px}}
 
+
+/* Slide 16: legibilidad en presentación y alcance real de las estrategias */
+#s16 .slide-main{grid-template-columns:minmax(0,38%) minmax(0,62%);gap:clamp(12px,2vw,26px)}
+#s16 .copy h2{font-size:clamp(34px,3.65vw,56px);margin-bottom:18px}
+#s16 .copy p{font-size:clamp(16px,1.34vw,19px);line-height:1.35;margin-bottom:13px}
+#s16 .copy .micro-caveat{font-size:clamp(13px,1vw,16px)!important}
+#s16 .pipeline-warning{font-weight:700;color:#8c2e35}
+#s16 .pipeline-role{border-top:1px solid #c9bfb3;padding-top:9px;margin-top:12px;color:#706257;font:italic clamp(12px,1.02vw,15px)/1.35 Georgia,serif}
+#s16 .pipeline-role b{color:#6c3034}
+#s16 .editorial-viz{min-height:0;padding:clamp(13px,1.45vw,20px)}
+#s16 .viz-eyebrow{margin-bottom:12px}
+#s16 .viz-controls{gap:5px;margin-bottom:11px}
+#s16 .viz-tab{font-size:clamp(11px,.9vw,13px);padding:9px 11px}
+#s16 .pipeline-line{min-height:110px}
+#s16 .pipeline-doc{min-height:83px;margin-top:7px;font-size:clamp(14px,1.1vw,17px);gap:5px}
+#s16 .pipeline-doc small{font-size:clamp(11px,.9vw,13px)}
+#s16 .pipeline-summary{font-size:clamp(14px,1.1vw,16px);line-height:1.35;min-height:60px}
+#s16 .verify-panel span{font-size:12px}
+#s16 .viz-disclaimer{font-size:11px}
+@media(max-width:780px){
+ #s16 .slide-main{grid-template-columns:1fr;gap:7px}
+ #s16 .copy h2{font-size:34px;margin-bottom:10px}
+ #s16 .copy p{font-size:15px;margin-bottom:5px}
+ #s16 .pipeline-role{font-size:11px;margin-top:3px;padding-top:5px}
+ #s16 .editorial-viz{padding:10px}
+ #s16 .pipeline-doc{min-height:63px;font-size:12px}
+ #s16 .pipeline-line{min-height:83px}
+ #s16 .pipeline-summary{min-height:48px;font-size:13px}
+ #s16 .viz-tab{font-size:10px;padding:7px 7px}
+}
+
 </style>
 </head>
 <body>
@@ -463,12 +494,17 @@ svg text{font-family:Arial,Helvetica,sans-serif}
  </div></div></div>
  <div class="slide-foot"><span>Más tokens disponibles ≠ más evidencia aprovechada</span><span class="source">Fuentes científicas enlazadas</span></div>
 </article>
-<article class="slide" data-owner="4" data-time="0:50" data-note="Una vez diagnosticado el problema, podemos probar estrategias de mitigación. Sin filtrar, enviamos documentos útiles mezclados con distractores. RAG busca y selecciona fragmentos relacionados con la pregunta. Filtrar elimina ruido y redundancias, pero puede perder evidencia. Con reranking podemos estimar relevancia y experimentar con colocar los pasajes más útiles al principio y al final, dejando los secundarios en el medio: es una heurística inspirada en la curva en U de la diapositiva 11, no una solución garantizada; estudios posteriores hallaron que no siempre supera otros órdenes. Finalmente, verificar significa contrastar las afirmaciones y citas con los documentos originales. Otro compromiso es la compresión: resumir una historia clínica o contrato puede borrar justo una excepción o antecedente crítico. Los botones muestran efectos conceptuales, no mejoras medidas de accuracy. La estrategia debe evaluarse para cada modelo y tarea." id="s16">
+<article class="slide" data-owner="4" data-time="0:50" data-note="Para mitigar este efecto sin modificar la arquitectura del modelo, intervenimos el pipeline de contexto. Primero, usamos RAG para recuperar fragmentos relevantes según la pregunta en vez de volcar un documento entero. Pero RAG también puede sufrir Lost in the Middle: aunque recupere bien, el modelo puede ignorar evidencia por su posición; y si usamos un top-k demasiado grande, agregamos distractores. Por eso filtramos para quedarnos con pocas piezas de alta señal, como R1 y R2 en el esquema. Después podemos reordenarlas, probando ubicar la evidencia más importante en los extremos y aprovechando la curva en U, aunque no garantiza mejor accuracy. Otra opción es comprimir el texto para reducir distractores, con el riesgo de perder excepciones o antecedentes críticos. Por último, verificamos: pedimos citas explícitas a R1 y R2 y las contrastamos con el documento original para detectar errores u omisiones. Estas decisiones se implementan en el pipeline de la aplicación, no son funciones garantizadas del modelo." id="s16">
  <div class="slide-head"><span class="kicker">16 / Estrategias para mitigar el problema</span><span class="pill">Integrante 4 · 50 s</span></div>
  <div class="slide-main">
- <div class="copy"><h2>¿Cómo podemos <span class="highlight">mitigar</span> el problema?</h2><p><b>RAG:</b> recuperar evidencia según la pregunta.</p><p><b>Filtrar y reordenar:</b> reducir ruido y probar evidencia relevante en los extremos.</p><p><b>Verificar:</b> comprobar las citas y la evidencia original.</p><p class="micro-caveat">Comprimir demasiado puede borrar excepciones o antecedentes críticos.</p></div>
+ <div class="copy"><h2>¿Cómo podemos <span class="highlight">mitigar</span> el problema?</h2>
+ <p><b>RAG:</b> recuperar los fragmentos más útiles. <span class="pipeline-warning">También puede sufrir sesgo posicional.</span></p>
+ <p><b>Filtrar y reordenar:</b> reducir distractores y probar evidencia relevante en los extremos.</p>
+ <p><b>Verificar:</b> contrastar las citas con los documentos originales.</p>
+ <p class="micro-caveat">Compresión: menos ruido, pero riesgo de perder datos críticos.</p>
+ <div class="pipeline-role">Estrategias del <b>pipeline de la aplicación</b>, no soluciones incorporadas automáticamente al LLM.</div></div>
  <div class="visual"><div class="editorial-viz">
- <div class="viz-eyebrow">Laboratorio de contexto · elegí una estrategia</div>
+ <div class="viz-eyebrow">Laboratorio de contexto · R1 y R2 contienen evidencia relevante</div>
  <div class="viz-controls" role="group" aria-label="Estrategia para mitigar Lost in the Middle">
  <button type="button" class="viz-tab active" data-strategy="raw" aria-pressed="true">Sin filtrar</button>
  <button type="button" class="viz-tab" data-strategy="rag" aria-pressed="false">RAG</button>
@@ -585,7 +621,7 @@ svg text{font-family:Arial,Helvetica,sans-serif}
   }));
   const pipelineDemo=document.getElementById('pipelineDemo'),pipelineSummary=document.getElementById('pipelineSummary');
   const pipelineNotes={
-    rag:'<b>RAG:</b> recuperar y destacar los documentos relevantes para la pregunta; la búsqueda puede omitir información.',
+    rag:'<b>RAG:</b> recupera los pasajes más relevantes. <b>Pero no elimina Lost in the Middle:</b> incluso si los recupera, el LLM puede ignorarlos según su posición.',
     raw:'<b>Sin selección:</b> documentos útiles y distractores conviven en un contexto largo.',
     filter:'<b>Filtrar:</b> se retiran fragmentos menos pertinentes, conservando los relevantes.',
     rank:'<b>Reordenar:</b> R1 al inicio y R2 al final; distractores en el medio. Heurística posicional, sin mejora garantizada.',
