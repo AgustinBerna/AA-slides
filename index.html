@@ -528,18 +528,17 @@ svg text{font-family:Arial,Helvetica,sans-serif}
  </div></div></div>
  <div class="slide-foot"><span>RAG · filtrado · reranking · verificación</span><span class="source"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13687758/" target="_blank" rel="noopener">RAG vs. contexto largo (2026) ↗</a></span></div>
 </article>
-<article class="slide" data-owner="4" data-time="0:25" data-note="En síntesis, la primera conclusión es que ampliar la ventana de contexto no garantiza que el modelo aproveche toda la información. Las estrategias de recuperación con RAG, filtrado, reordenamiento y verificación pueden ayudar, pero sus efectos no son universales y la compresión puede perder detalles importantes. Por eso, la robustez se demuestra midiendo qué ocurre cuando la evidencia cambia de posición, y comprobando las respuestas contra las fuentes. Muchas gracias." id="s17">
+<article class="slide" data-owner="4" data-time="0:25" data-note="En conclusión, Lost in the Middle muestra que, aunque la información esté dentro de la ventana de contexto, un modelo puede pasarla por alto, especialmente cuando aparece en el medio. Una ventana más grande no garantiza que la aproveche mejor. Para reducir este riesgo podemos recuperar menos fragmentos, pero más relevantes, filtrarlos, reordenarlos y contrastar las respuestas con las fuentes originales. Son estrategias útiles, pero ninguna elimina el sesgo en todos los casos. Muchas gracias." id="s17">
  <div class="slide-head"><span class="kicker">17 / Cierre</span><span class="pill">Integrante 4 · 25 s</span></div>
  <div class="slide-main">
  <div class="copy"><h2>La información puede estar <span class="highlight">ahí</span>… y aun así perderse</h2>
  <p class="lead">El desafío es <b>recuperarla, utilizarla y verificarla</b>, independientemente de su posición.</p>
- <div class="quote">La robustez se demuestra, no se presupone.</div>
+ <div class="quote">Mitigar implica seleccionar, reordenar y verificar la evidencia.</div>
  </div>
  <div class="visual"><div class="editorial-viz">
- <div class="viz-eyebrow">Tres ideas para llevarse</div>
+ <div class="viz-eyebrow">Dos conclusiones del estudio</div>
  <div class="eval-row"><span class="eval-number">I</span><span>La posición de la evidencia afecta significativamente la precisión.</span></div>
  <div class="eval-row"><span class="eval-number">II</span><span>Una ventana de contexto más grande no garantiza un mejor aprovechamiento de la información.</span></div>
- <div class="eval-row"><span class="eval-number">III</span><span>La robustez se demuestra con evaluación.</span></div>
  <div class="eval-rule"></div>
  <p style="font-family:Georgia,serif;font-size:clamp(18px,2vw,27px);color:#852e36;margin:16px 0">¿Lo recuerda o solo lo recibió?</p>
  <div class="refs"><a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener">Liu et al. (2024) ↗</a></div>
