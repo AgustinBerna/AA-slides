@@ -111,6 +111,29 @@ svg text{font-family:Arial,Helvetica,sans-serif}
 .refs{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
 .refs a{font-size:12px;border:1px solid #b8afa3;background:transparent;color:#8c2e35;border-radius:0;padding:11px 13px;text-decoration:none}
 .refs a:hover{background:#ece5db}
+/* ===== Integrante 1 · animaciones ===== */
+.anim-wrap{width:100%;display:flex;flex-direction:column;gap:8px}
+.anim-wrap svg{width:100%;height:auto;overflow:visible}
+.replay{align-self:flex-end;border:1px solid #c4bcb0;background:transparent;color:#7a7066;font-size:11px;padding:4px 9px;letter-spacing:.05em;opacity:.75}
+.replay:hover{background:#dbd5ca;opacity:1}
+.copy .formula{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:clamp(14px,1.25vw,18px);color:#8c2e35;background:#f1ece3;border-left:2px solid #8c2e35;padding:7px 12px;display:inline-block}
+.fx{transition:opacity .45s ease,transform .55s cubic-bezier(.3,.7,.2,1);transform-box:fill-box}
+.fx.off{opacity:0}
+.fx.up.off{transform:translateY(14px)}
+.bar{transform-box:fill-box;transform-origin:left center;transition:transform .7s ease}
+.cbox{transition:fill .35s,stroke .35s}
+.cell.on .cbox{fill:#f3e3df;stroke:#8c2e35}
+.mover{transition:transform .85s cubic-bezier(.45,.05,.25,1),opacity .5s}
+.mover.off{opacity:0}
+.draw{transition:stroke-dashoffset 1.1s ease}
+.gnode.flash circle{animation:gflash 1s ease}
+@keyframes gflash{0%,35%{fill:#8c2e35}100%{fill:#fbfaf6}}
+.gate-card{transition:background .3s,color .3s,border-color .3s}
+.gate-card.on{background:#8c2e35!important;color:#fbfaf6!important;border-color:#8c2e35!important}
+.gate-card.on small{color:#f1dcd8!important}
+.star-box.pulse{animation:starpulse 1.4s ease 2}
+@keyframes starpulse{0%,100%{box-shadow:0 0 0 0 #8c2e3500}50%{box-shadow:0 0 0 7px #8c2e3530}}
+.noanim,.noanim *{transition:none!important;animation:none!important}
 @media(max-width:780px){
  .shell{padding:10px}.toolbar{flex-wrap:wrap}.brand{width:100%;font-size:12px}
  .stage{aspect-ratio:auto;min-height:730px;border-radius:0}
@@ -297,37 +320,31 @@ svg text{font-family:Arial,Helvetica,sans-serif}
 </header>
 <div class="stage" id="stage">
 <!-- ===== INTEGRANTE 1: SLIDES 01–04 ===== -->
-<article class="slide active" data-owner="1" data-time="0:25" data-note="Abrir con una pregunta provocadora y un ejemplo concreto: el dato está en el prompt, pero la respuesta falla. No atribuir todavía una causa. Esta es la portada y parte de la introducción." id="s1">
- <div class="slide-head"><span class="kicker">01 / Introducción</span><span class="pill">Integrante 1 · 25 s</span></div>
+<article class="slide active" data-owner="1" data-time="0:20" data-note="¿Por qué un modelo puede olvidar información que ya recibió? Pensemos en una frase: «Viví diez años en Francia, trabajé en una panadería, me hice hincha del PSG… y por eso hoy hablo fluido ___». Para completar «francés» hay que acordarse de algo que apareció muchas palabras atrás: eso es una dependencia larga. Para entender por qué cuesta, recorramos cómo evolucionaron las redes que procesan secuencias. (No atribuir todavía una causa.)" id="s1">
+ <div class="slide-head"><span class="kicker">01 / Introducción</span></div>
  <div class="slide-main">
  <div class="copy"><p style="color:var(--cyan);font-weight:800;letter-spacing:.13em;font-size:16px">TP · APRENDIZAJE AUTOMÁTICO</p><h1>Lost in<br><span class="highlight">the Middle</span></h1><p class="lead">Si la respuesta está dentro del contexto, ¿por qué el modelo a veces no la encuentra?</p><p style="font-size:15px;color:#686058">De las RNN a la atención, y de la atención a sus límites.</p></div>
  <div class="visual"><div class="glass" style="max-width:550px">
  <div class="art-kicker">Contexto muy largo</div><div style="display:grid;gap:10px;margin-top:17px">
- <div style="height:10px;background:linear-gradient(90deg,#b4aca1 90%,transparent 90%);border-radius:5px"></div><div style="height:10px;background:linear-gradient(90deg,#b4aca1 95%,transparent 95%);border-radius:5px"></div><div style="height:10px;background:linear-gradient(90deg,#b4aca1 75%,transparent 75%);border-radius:5px"></div><div style="border:1px solid #9b4c3f;background:#f1e4d9;color:#612b26;border-radius:0;padding:13px;font-weight:750">★ EL DATO RELEVANTE ESTÁ ACÁ</div><div style="height:10px;background:#b4aca1;border-radius:5px"></div><div style="height:10px;background:linear-gradient(90deg,#b4aca1 88%,transparent 88%);border-radius:5px"></div><div style="height:10px;background:#b4aca1;border-radius:5px"></div></div>
- <div style="margin-top:17px;border-top:1px solid #afa69b;padding-top:13px;color:#8c2e35">Respuesta: <b>«No encuentro ese dato»</b></div>
+ <div class="fx up" style="height:10px;background:linear-gradient(90deg,#b4aca1 90%,transparent 90%);border-radius:5px"></div><div class="fx up" style="height:10px;background:linear-gradient(90deg,#b4aca1 95%,transparent 95%);border-radius:5px"></div><div class="fx up" style="height:10px;background:linear-gradient(90deg,#b4aca1 75%,transparent 75%);border-radius:5px"></div><div class="fx up star-box" style="border:1px solid #9b4c3f;background:#f1e4d9;color:#612b26;border-radius:0;padding:13px;font-weight:750">★ EL DATO RELEVANTE ESTÁ ACÁ</div><div class="fx up" style="height:10px;background:#b4aca1;border-radius:5px"></div><div class="fx up" style="height:10px;background:linear-gradient(90deg,#b4aca1 88%,transparent 88%);border-radius:5px"></div><div class="fx up" style="height:10px;background:#b4aca1;border-radius:5px"></div></div>
+ <div class="fx s1-resp" style="margin-top:17px;border-top:1px solid #afa69b;padding-top:13px;color:#8c2e35">Respuesta: <b>«No encuentro ese dato»</b></div>
  </div></div>
  </div><div class="slide-foot"><span>Planteo del problema</span><span class="source">Visual conceptual</span></div>
 </article>
-<article class="slide" data-owner="1" data-time="0:30" data-note="RNN: cada estado oculto h_t combina entrada actual y estado previo. Se procesa en orden. La información remota puede perderse durante la propagación, y entrenar dependencias largas es difícil por gradientes que se desvanecen/explotan." id="s2">
- <div class="slide-head"><span class="kicker">02 / Antes de los Transformers</span><span class="pill">Integrante 1 · 30 s</span></div>
- <div class="slide-main"><div class="copy"><h2>Las RNN leían <span class="highlight">en secuencia</span></h2><p>Cada token actualiza un <b>estado oculto</b> que transporta información de lo anterior.</p><ul><li>El contexto lejano debe atravesar muchos pasos.</li><li>Las dependencias largas son difíciles de aprender.</li></ul></div>
- <div class="visual"><svg viewBox="0 0 620 345" role="img" aria-label="RNN desenrollada, secuencia de estados h uno a h cinco y una señal que se atenúa">
- <text x="24" y="44" class="svg-label">RNN desenrollada</text><g fill="none" stroke="#8c8376" stroke-width="3"><path d="M99 157H504"/><path d="M505 157l-12 -7v14z" fill="#8c8376"/></g>
- <g fill="#e6e0d6" stroke="#938678" stroke-width="2"><rect x="30" y="124" width="88" height="67" rx="14"/><rect x="146" y="124" width="88" height="67" rx="14"/><rect x="262" y="124" width="88" height="67" rx="14"/><rect x="378" y="124" width="88" height="67" rx="14"/><rect x="494" y="124" width="88" height="67" rx="14"/></g>
- <g class="svg-label" text-anchor="middle"><text x="74" y="164">h₁</text><text x="190" y="164">h₂</text><text x="306" y="164">h₃</text><text x="422" y="164">h₄</text><text x="538" y="164">h₅</text></g>
- <g fill="#685f57" font-size="18" text-anchor="middle"><text x="74" y="230">x₁</text><text x="190" y="230">x₂</text><text x="306" y="230">x₃</text><text x="422" y="230">x₄</text><text x="538" y="230">x₅</text></g>
- <g stroke-width="7" stroke-linecap="round"><path d="M74 98H163" stroke="#8c2e35"/><path d="M190 98H279" stroke="#8c2e3599"/><path d="M306 98H395" stroke="#8c2e3555"/><path d="M422 98H539" stroke="#8c2e3522"/></g><text x="28" y="288" fill="#8c2e35" font-size="17">Señal del comienzo</text><text x="576" y="288" text-anchor="end" fill="#6e655b" font-size="17">puede atenuarse →</text>
- </svg></div></div><div class="slide-foot"><span>Clase 13 · RNN</span><span class="source">Esquema simplificado</span></div>
+<article class="slide" data-owner="1" data-time="0:45" data-note="Una red neuronal es una cadena de capas: cada una multiplica la entrada por pesos, aplica una función no lineal y pasa el resultado a la siguiente; los pesos se aprenden con descenso por el gradiente y backpropagation. Pero el texto es una secuencia, y una red común necesita entradas de tamaño fijo. Las RNN leen una palabra por vez y actualizan un estado oculto hₜ, su memoria: la salida de un paso es entrada del siguiente, siempre con los mismos pesos. [Animación] Toda la historia queda comprimida en un solo vector que se reescribe en cada paso: si «Francia» apareció cincuenta palabras atrás, tuvo que sobrevivir cincuenta reescrituras. Y al entrenar, el gradiente viaja hacia atrás multiplicándose paso a paso y se desvanece (0,9⁵⁰ ≈ 0,005). Resultado: a las RNN les cuesta aprender dependencias largas." id="s2">
+ <div class="slide-head"><span class="kicker">02 / Antes de los Transformers</span></div>
+ <div class="slide-main"><div class="copy"><h2>Las RNN leían <span class="highlight">en secuencia</span></h2><p>Cada token actualiza un <b>estado oculto</b> hₜ que transporta información de lo anterior, siempre con los <b>mismos pesos</b>.</p><p class="formula">hₜ = tanh(W·hₜ₋₁ + U·xₜ + b)</p><ul><li>Toda la historia se comprime en <b>un solo vector</b>.</li><li>El contexto lejano debe atravesar muchos pasos.</li><li>Las dependencias largas son difíciles de aprender: el gradiente <b>se desvanece</b>.</li></ul></div>
+ <div class="visual"><div class="anim-wrap"><svg id="rnnSvg" viewBox="0 0 640 380" role="img" aria-label="RNN desenrollada: las palabras entran una por una, la información de Francia se diluye en los estados ocultos y el gradiente se desvanece hacia atrás"></svg><button class="replay" type="button">↻ Repetir animación · R</button></div></div></div><div class="slide-foot"><span></span><span class="source">Esquema animado · Bengio et al., 1994</span></div>
 </article>
-<article class="slide" data-owner="1" data-time="0:25" data-note="Las LSTM agregan compuertas y estado de celda para facilitar el flujo de información a través de muchos pasos. No son memoria perfecta: el problema de contexto largo no desaparece mágicamente." id="s3">
- <div class="slide-head"><span class="kicker">03 / La mejora LSTM</span><span class="pill">Integrante 1 · 25 s</span></div>
- <div class="slide-main"><div class="copy"><h2>LSTM: <span class="highlight">memoria con compuertas</span></h2><p>Una vía de estado de celda y compuertas aprendidas regulan qué información se conserva, actualiza o utiliza.</p><p class="lead">Mejora el manejo de dependencias largas, pero el procesamiento sigue siendo recurrente.</p></div>
- <div class="visual"><div class="glass"><div class="art-title">Una celda LSTM · esquema</div><div class="cardrow"><div class="step" style="border-color:#8c2e35">Olvidar<small>¿Qué descartar?</small></div><span class="arrow">→</span><div class="step" style="border-color:#8c2e35">Entrada<small>¿Qué guardar?</small></div><span class="arrow">→</span><div class="step" style="border-color:#9e6d43">Salida<small>¿Qué usar?</small></div></div><div style="height:18px;background:linear-gradient(90deg,#8c2e35,#8c2e35,#9e6d43);border-radius:0;margin-top:30px"></div><div class="mini-title">Estado de celda: una vía para transportar información</div></div></div></div><div class="slide-foot"><span>Clase 13 · LSTM</span><span class="source">Esquema conceptual de compuertas</span></div>
+<article class="slide" data-owner="1" data-time="0:40" data-note="En 1997, Hochreiter y Schmidhuber proponen las LSTM. Agregan un segundo estado, el cell state: una cinta de memoria que recorre toda la secuencia. Tres compuertas, con valores entre 0 y 1, la regulan: la de olvido decide qué borrar, la de entrada qué anotar y la de salida qué usar en este paso. [Animación] «Francia» se anota y viaja por la cinta; «panadería» se olvida; al llegar a «fluido», la compuerta de salida la recupera. Como la memoria se actualiza sumando y no reescribiéndose, el gradiente fluye mejor y se sostienen dependencias más largas. Pero sigue leyendo palabra por palabra, no se puede paralelizar, y la memoria sigue siendo un vector de tamaño fijo. No es memoria perfecta." id="s3">
+ <div class="slide-head"><span class="kicker">03 / La mejora LSTM</span></div>
+ <div class="slide-main"><div class="copy"><h2>LSTM: <span class="highlight">memoria con compuertas</span></h2><p>Una vía de estado de celda y compuertas aprendidas regulan qué información se conserva, actualiza o utiliza. La memoria se actualiza <b>sumando</b>, y el gradiente fluye mejor.</p><p class="lead">Mejora el manejo de dependencias largas, pero el procesamiento sigue siendo recurrente.</p></div>
+ <div class="visual"><div class="glass anim-wrap"><div class="art-title" style="margin-bottom:4px">Una celda LSTM · esquema</div><svg id="lstmSvg" viewBox="0 0 640 275" role="img" aria-label="Cinta de memoria de una LSTM: Francia se guarda y viaja por el cell state, panadería se olvida y al final la compuerta de salida recupera Francia"></svg><div class="cardrow"><div class="step gate-card" data-gate="f" style="border-color:#8c2e35;padding:10px 8px">Olvidar<small>¿Qué descartar?</small></div><span class="arrow">→</span><div class="step gate-card" data-gate="i" style="border-color:#8c2e35;padding:10px 8px">Entrada<small>¿Qué guardar?</small></div><span class="arrow">→</span><div class="step gate-card" data-gate="o" style="border-color:#9e6d43;padding:10px 8px">Salida<small>¿Qué usar?</small></div></div><div class="mini-title" style="margin-top:6px">Estado de celda: una vía para transportar información</div><button class="replay" type="button">↻ Repetir animación · R</button></div></div></div><div class="slide-foot"><span></span><span class="source">Esquema animado · Hochreiter &amp; Schmidhuber, 1997</span></div>
 </article>
-<article class="slide" data-owner="1" data-time="0:30" data-note="Transición al bloque 2: comparar caminos secuenciales de RNN con interacciones directas que permite self-attention. Evitar decir que un Transformer atiende perfectamente todos los tokens: esa será la limitación central." id="s4">
- <div class="slide-head"><span class="kicker">04 / El cambio de paradigma</span><span class="pill">Integrante 1 · 30 s</span></div>
- <div class="slide-main"><div class="copy"><h2>¿Y si los tokens pudieran <span class="highlight">relacionarse directamente</span>?</h2><p>En vez de depender solo del paso anterior, cada token puede combinar información de otras posiciones permitidas del contexto.</p><div class="quote">Ese es el papel de la <span class="highlight">self-attention</span>.</div></div>
- <div class="visual"><div class="comp"><div><div class="mini-title">RNN · pasos consecutivos</div><div class="sequence"><span class="node">1</span><span class="connector">→</span><span class="node">2</span><span class="connector">→</span><span class="node">3</span></div><div class="mini-title" style="margin-top:18px">La señal atraviesa pasos</div></div><div><div class="mini-title">Transformer · atención</div><svg viewBox="0 0 270 155"><g stroke="#8c2e35" stroke-width="2.2" opacity=".85" fill="none"><path d="M35 100Q120 -8 222 100"/><path d="M35 100Q135 50 222 100"/><path d="M100 100Q165 20 222 100"/></g><g fill="#e9e1d6" stroke="#9b6a64" stroke-width="2"><circle cx="35" cy="100" r="25"/><circle cx="100" cy="100" r="25"/><circle cx="165" cy="100" r="25"/><circle cx="230" cy="100" r="25"/></g><g fill="#2c2621" font-size="18" font-weight="800" text-anchor="middle"><text x="35" y="106">1</text><text x="100" y="106">2</text><text x="165" y="106">3</text><text x="230" y="106">4</text></g></svg><div class="mini-title">Relaciones entre posiciones</div></div></div></div></div><div class="slide-foot"><span>Transición al integrante 2</span><span class="source">Ilustración simplificada</span></div>
+<article class="slide" data-owner="1" data-time="0:40" data-note="En 2017 aparece el Transformer («Attention Is All You Need»). En vez de pasar la información en cadena, recibe toda la secuencia a la vez y usa atención: cada token calcula qué tan relevante es cada uno de los otros y toma información directamente de ellos. [Animación] Arriba, en la RNN, «Francia» tiene que atravesar todos los pasos hasta «fluido» y se va debilitando. Abajo, «fluido» la mira directamente: un solo paso. Además, como no es secuencial, se puede paralelizar, y eso permitió entrenar los grandes modelos de lenguaje. Cómo funciona exactamente esa atención, y si alcanza para aprovechar todo el contexto, es lo que vemos a continuación. (Evitar decir que un Transformer atiende perfectamente todos los tokens: esa será la limitación central.)" id="s4">
+ <div class="slide-head"><span class="kicker">04 / El cambio de paradigma</span></div>
+ <div class="slide-main"><div class="copy"><h2>¿Y si los tokens pudieran <span class="highlight">relacionarse directamente</span>?</h2><p>En vez de depender solo del paso anterior, cada token puede combinar información de otras posiciones permitidas del contexto, y todo se procesa <b>en paralelo</b>.</p><div class="quote">Ese es el papel de la <span class="highlight">self-attention</span>.</div></div>
+ <div class="visual"><div class="anim-wrap"><svg id="attnSvg" viewBox="0 0 640 390" role="img" aria-label="Comparación: en la RNN la señal de Francia atraviesa varios pasos y se debilita; en el Transformer fluido se conecta directamente con todos los tokens"></svg><button class="replay" type="button">↻ Repetir animación · R</button></div></div></div><div class="slide-foot"><span>Transición al integrante 2</span><span class="source">Ilustración animada · pesos ilustrativos · Vaswani et al., 2017</span></div>
 </article>
 <!-- ===== INTEGRANTE 2: SLIDES 05–08 ===== -->
 <article class="slide" data-owner="2" data-time="0:30" data-note="Definir tokens y embeddings. La información de posición debe incorporarse mediante mecanismos posicionales, pero varía según la arquitectura (codificaciones absolutas, relativas, RoPE). Presentar solo la idea." id="s5">
@@ -531,7 +548,7 @@ svg text{font-family:Arial,Helvetica,sans-serif}
  <div class="slide-foot"><span>Gracias · Fin del trabajo</span><span class="source">TP Aprendizaje Automático</span></div>
 </article>
 </div>
-<div class="bottom"><div class="leftnav"><button class="navbtn" id="prev" aria-label="Diapositiva anterior">← Anterior</button><span id="counter" class="count">01 / 17</span><button class="navbtn" id="next" aria-label="Diapositiva siguiente">Siguiente →</button></div><div class="progress" aria-label="Progreso de la presentación"><span id="progressBar"></span></div><span class="help">← → navegar · N guion · F pantalla completa</span></div>
+<div class="bottom"><div class="leftnav"><button class="navbtn" id="prev" aria-label="Diapositiva anterior">← Anterior</button><span id="counter" class="count">01 / 16</span><button class="navbtn" id="next" aria-label="Diapositiva siguiente">Siguiente →</button></div><div class="progress" aria-label="Progreso de la presentación"><span id="progressBar"></span></div><span class="help">← → navegar · N guion · F pantalla completa · R repetir animación</span></div>
 <aside id="notes" class="notes" aria-live="polite"><b>Guion sugerido</b><p id="noteText"></p></aside>
 </div>
 <script>
@@ -546,6 +563,156 @@ svg text{font-family:Arial,Helvetica,sans-serif}
   const params=new URLSearchParams(location.search);
   let owner=['1','2','3','4'].includes(params.get('integrante'))?params.get('integrante'):'all';
   ownerFilter.value=owner;
+  /* ===== Integrante 1 · animaciones (slides 01–04) ===== */
+  const NS='http://www.w3.org/2000/svg';
+  function el(tag,attrs,parent,text){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e}
+  const RED='#8c2e35',GREY='#8c8376';
+  let runId=0,shownId=null;
+  const reduceMotion=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const wait=(ms,id)=>new Promise((res,rej)=>setTimeout(()=>id===runId?res():rej('cancel'),ms));
+  const show=e=>e&&e.classList.remove('off'),hide=e=>e&&e.classList.add('off');
+  const moveTo=(g,x,y)=>{g.style.transform='translate('+x+'px,'+y+'px)'};
+  function markers(svg,p){const d=el('defs',{},svg);[[p+'g',GREY],[p+'r',RED]].forEach(([id,c])=>{const m=el('marker',{id,viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:6,markerHeight:6,orient:'auto-start-reverse'},d);el('path',{d:'M0 0L10 5L0 10z',fill:c},m)})}
+  function flash(g){g.classList.remove('flash');g.getBBox();void g.getBoundingClientRect();g.classList.add('flash')}
+  const SEQ=['Viví','en','Francia','…','hablo','fluido'],XS=[62,166,270,374,478,582];
+
+  // --- Slide 02 · RNN desenrollada ---
+  function buildRNN(svg){
+    markers(svg,'rn');const R={words:[],ins:[],recs:[],cells:[],bars:[],grad:[],share:[0,0,1,.55,.3,.14]};
+    el('text',{x:20,y:30,class:'svg-label'},svg,'RNN desenrollada');
+    el('rect',{x:20,y:44,width:12,height:12,fill:RED},svg);
+    el('text',{x:38,y:55,style:'font-size:14px;fill:#6b6258'},svg,'cuánto de «Francia» queda en hₜ');
+    for(let t=0;t<5;t++){const g=el('g',{class:'fx'},svg),x1=XS[t]+40,x2=XS[t+1]-42;
+      el('path',{d:'M'+x1+' 162H'+x2,stroke:GREY,'stroke-width':2.5,fill:'none','marker-end':'url(#rng)'},g);
+      el('text',{x:(x1+x2)/2,y:154,'text-anchor':'middle',style:'font-size:12px;fill:#8a8075;font-style:italic'},g,'W');R.recs.push(g)}
+    XS.forEach((x,t)=>{
+      const c=el('g',{class:'cell'},svg);
+      el('rect',{class:'cbox',x:x-40,y:132,width:80,height:64,rx:12,fill:'#e6e0d6',stroke:'#938678','stroke-width':2},c);
+      el('text',{x,y:166,'text-anchor':'middle',class:'svg-label'},c,'h'+'₁₂₃₄₅₆'[t]);
+      el('rect',{x:x-28,y:179,width:56,height:7,fill:'#d6cec2'},c);
+      const b=el('rect',{class:'bar',x:x-28,y:179,width:56,height:7,fill:RED},c);b.style.transform='scaleX('+R.share[t]+')';
+      R.cells.push(c);R.bars.push(b);
+      const i=el('path',{class:'fx',d:'M'+x+' 256V204',stroke:GREY,'stroke-width':2,fill:'none','marker-end':'url(#rng)'},svg);R.ins.push(i);
+      const w=el('g',{class:'fx up'},svg),hot=t===2;
+      el('rect',{x:x-40,y:258,width:80,height:30,fill:hot?RED:'#eee9e0',stroke:hot?RED:'#aea69b'},w);
+      el('text',{x,y:278,'text-anchor':'middle',style:'font-size:15px;font-family:Georgia,serif;fill:'+(hot?'#fff':'#2c2621')},w,SEQ[t]);R.words.push(w)});
+    R.out=el('g',{class:'fx'},svg);
+    el('path',{d:'M582 130V100',stroke:RED,'stroke-width':2,fill:'none','marker-end':'url(#rnr)'},R.out);
+    el('text',{x:582,y:88,'text-anchor':'middle',style:'font-size:20px;font-family:Georgia,serif;font-style:italic;fill:'+RED},R.out,'¿francés?');
+    el('text',{x:582,y:66,'text-anchor':'middle',style:'font-size:13px;fill:#7a7066'},R.out,'señal débil');
+    [[570,478,6,1],[478,374,3.5,.6],[374,276,1.8,.3]].forEach(([a,b,w,o],k)=>{
+      R.grad.push(el('path',{class:'fx',d:'M'+a+' 116H'+b,stroke:RED,'stroke-width':w,opacity:o,fill:'none','stroke-linecap':'round','marker-end':k===2?'url(#rnr)':''},svg))});
+    R.gradLabel=el('text',{class:'fx',x:262,y:121,'text-anchor':'end',style:'font-size:14px;font-weight:700;fill:'+RED},svg,'gradiente al entrenar');
+    R.cap1=el('text',{class:'fx',x:320,y:328,'text-anchor':'middle',style:'font-size:16px;font-family:Georgia,serif;fill:#4d4740'},svg,'Con 50 pasos y un factor 0,9 por paso: 0,9⁵⁰ ≈ 0,005');
+    R.cap2=el('text',{class:'fx',x:320,y:352,'text-anchor':'middle',style:'font-size:13px;font-style:italic;fill:#7a7066'},svg,'la señal de error casi no llega a los primeros pasos');
+    return R}
+  const rnn=buildRNN(document.getElementById('rnnSvg'));
+  function rnnAll(f){[...rnn.words,...rnn.ins,...rnn.recs,...rnn.grad,rnn.out,rnn.gradLabel,rnn.cap1,rnn.cap2].forEach(f)}
+
+  // --- Slide 03 · LSTM, cinta de memoria ---
+  function buildLSTM(svg){
+    markers(svg,'ls');const L={xs:[110,250,390,530],words:['Francia','panadería','PSG','fluido'],w:[],ins:[],hs:[],cells:[],fn:[],in:[]};
+    el('text',{x:22,y:48,style:'font-size:13px;font-weight:700;letter-spacing:.06em;fill:'+RED},svg,'CELL STATE Cₜ');
+    el('path',{d:'M20 60H600L622 80L600 100H20Z',fill:'#efe6dc',stroke:'#b8afa2','stroke-width':1.5},svg);
+    L.xs.forEach((x,t)=>{
+      const c=el('g',{class:'cell'},svg);
+      el('rect',{class:'cbox',x:x-52,y:148,width:104,height:46,rx:8,fill:'#f0ece3',stroke:'#b8afa2','stroke-width':1.5},c);
+      el('text',{x,y:176,'text-anchor':'middle',style:'font-size:12px;fill:#6b6258;letter-spacing:.08em'},c,'σ  σ  tanh  σ');L.cells.push(c);
+      el('path',{d:'M'+(x-28)+' 148V93',stroke:'#a99f93','stroke-width':1.5,fill:'none'},svg);
+      el('path',{d:'M'+(x+22)+' 148V93',stroke:'#a99f93','stroke-width':1.5,fill:'none'},svg);
+      el('text',{x:x-35,y:126,'text-anchor':'end',style:'font-size:13px;font-style:italic;fill:'+RED},svg,'f');
+      el('text',{x:x+29,y:126,style:'font-size:13px;font-style:italic;fill:'+RED},svg,'i');
+      [[x-28,'×',L.fn],[x+22,'+',L.in]].forEach(([cx,s,arr])=>{const g=el('g',{class:'gnode'},svg);
+        el('circle',{cx,cy:80,r:12,fill:'#fbfaf6',stroke:RED,'stroke-width':1.6},g);
+        el('text',{x:cx,y:85,'text-anchor':'middle',style:'font-size:16px;font-weight:700;fill:'+RED},g,s);arr.push(g)});
+      L.ins.push(el('path',{class:'fx',d:'M'+x+' 226V198',stroke:GREY,'stroke-width':2,fill:'none','marker-end':'url(#lsg)'},svg));
+      const w=el('g',{class:'fx up'},svg),hot=t===0;
+      el('rect',{x:x-48,y:228,width:96,height:28,fill:hot?RED:'#eee9e0',stroke:hot?RED:'#aea69b'},w);
+      el('text',{x,y:247,'text-anchor':'middle',style:'font-size:14px;font-family:Georgia,serif;fill:'+(hot?'#fff':'#2c2621')},w,L.words[t]);L.w.push(w);
+      if(t<3){const g=el('g',{class:'fx'},svg);el('path',{d:'M'+(x+52)+' 171H'+(L.xs[t+1]-54),stroke:GREY,'stroke-width':2,fill:'none','marker-end':'url(#lsg)'},g);
+        el('text',{x:x+70,y:164,'text-anchor':'middle',style:'font-size:12px;font-style:italic;fill:#8a8075'},g,'hₜ');L.hs.push(g)}});
+    L.out=el('g',{class:'fx'},svg);
+    el('path',{d:'M596 58V30',stroke:RED,'stroke-width':2,fill:'none','marker-end':'url(#lsr)'},L.out);
+    el('text',{x:586,y:44,'text-anchor':'end',style:'font-size:13px;font-style:italic;fill:'+RED},L.out,'o');
+    el('text',{x:630,y:20,'text-anchor':'end',style:'font-size:17px;font-family:Georgia,serif;fill:'+RED},L.out,'salida → «francés» ✓');
+    const chip=(label,fill,tc)=>{const g=el('g',{class:'mover'},svg);el('rect',{x:-32,y:-9,width:64,height:18,rx:3,fill,stroke:fill==='#fff'?'#aea69b':fill},g);
+      el('text',{x:0,y:4,'text-anchor':'middle',style:'font-size:11px;font-weight:700;fill:'+tc},g,label);return g};
+    L.P=chip('panadería','#fff','#5b534b');L.S=chip('PSG','#fff','#5b534b');L.F=chip('Francia',RED,'#fff');
+    return L}
+  const lstm=buildLSTM(document.getElementById('lstmSvg'));
+  const lcard=(s,k)=>s.querySelectorAll('.gate-card').forEach(c=>c.classList.toggle('on',c.dataset.gate===k));
+  function lstmFinal(s){[...lstm.w,...lstm.ins,...lstm.hs,lstm.out].forEach(show);moveTo(lstm.F,596,71);moveTo(lstm.S,596,90);moveTo(lstm.P,362,90);hide(lstm.P);show(lstm.F);show(lstm.S);lstm.cells.forEach(c=>c.classList.remove('on'));lcard(s,null)}
+
+  // --- Slide 04 · RNN vs. Transformer ---
+  function buildAttn(svg){
+    markers(svg,'at');const A={arcs:[],wl:[],wts:[.05,.03,.62,.08,.22]};
+    const kick=(y,t)=>el('text',{x:20,y,style:'font-size:12px;font-weight:700;letter-spacing:.15em;fill:'+RED},svg,t);
+    const tok=(x,y,t,q)=>{const g=el('g',{},svg);const r=el('rect',{x:x-40,y,width:80,height:34,fill:'#e9e3da',stroke:q?RED:'#a79f93','stroke-width':q?2.5:1.5},g);
+      el('text',{x,y:y+22,'text-anchor':'middle',style:'font-size:15px;font-family:Georgia,serif;fill:#2c2621'},g,t);return r};
+    kick(22,'RNN · PASOS CONSECUTIVOS');
+    XS.forEach((x,t)=>{tok(x,40,SEQ[t],t===5);if(t<5)el('path',{d:'M'+(x+40)+' 57H'+(XS[t+1]-42),stroke:GREY,'stroke-width':2,fill:'none','marker-end':'url(#atg)'},svg)});
+    A.pulse=el('g',{class:'mover'},svg);el('circle',{cx:0,cy:0,r:8,fill:RED},A.pulse);
+    A.hop=el('text',{class:'fx',x:620,y:102,'text-anchor':'end',style:'font-size:14px;font-family:Georgia,serif;font-style:italic;fill:#5b534b'},svg,'«Francia» → «fluido»: un paso tras otro, la señal se debilita');
+    el('path',{d:'M20 126H620',stroke:'#c4bcb0','stroke-dasharray':'4 6'},svg);
+    kick(154,'TRANSFORMER · ATENCIÓN');
+    XS.forEach((x,t)=>{if(t===5)return;const d=582-x,k=60+.42*d,w=A.wts[t];
+      const p=el('path',{class:'draw',d:'M582 300Q'+((582+x)/2)+' '+(300-k)+' '+x+' 300',fill:'none',stroke:RED,'stroke-width':1.5+14*w,opacity:.3+.7*w,'stroke-linecap':'round',pathLength:1,'stroke-dasharray':1},svg);
+      p.style.strokeDashoffset=0;A.arcs.push(p);
+      A.wl.push(el('text',{class:'fx',x,y:352,'text-anchor':'middle',style:'font-size:'+(t===2?15:12)+'px;font-weight:700;fill:'+(t===2?RED:'#8a8075')},svg,String(w).replace('.',',')))});
+    A.toks=XS.map((x,t)=>tok(x,300,SEQ[t],t===5));
+    A.direct=el('text',{class:'fx',x:20,y:380,style:'font-size:15px;font-weight:700;fill:'+RED},svg,'1 paso: acceso directo a cualquier token');
+    el('text',{x:620,y:380,'text-anchor':'end',style:'font-size:12px;font-style:italic;fill:#8a8075'},svg,'pesos ilustrativos');
+    return A}
+  const attn=buildAttn(document.getElementById('attnSvg'));
+  function attnFinal(){moveTo(attn.pulse,582,30);attn.pulse.style.opacity=.35;show(attn.pulse);attn.arcs.forEach(a=>a.style.strokeDashoffset=0);[...attn.wl,attn.hop,attn.direct].forEach(show);attn.toks[2].setAttribute('fill','#f1e4d9')}
+
+  const anims={
+    s1:{
+      reset(s){s.querySelectorAll('.fx').forEach(hide);s.querySelector('.star-box').classList.remove('pulse')},
+      final(s){s.querySelectorAll('.fx').forEach(show)},
+      async play(s,id){await wait(250,id);for(const r of s.querySelectorAll('.fx.up')){show(r);await wait(110,id)}
+        s.querySelector('.star-box').classList.add('pulse');await wait(1100,id);show(s.querySelector('.s1-resp'))}},
+    s2:{
+      reset(){rnnAll(hide);rnn.bars.forEach(b=>b.style.transform='scaleX(0)');rnn.cells.forEach(c=>c.classList.remove('on'))},
+      final(){rnnAll(show);rnn.bars.forEach((b,t)=>b.style.transform='scaleX('+rnn.share[t]+')');rnn.cells.forEach(c=>c.classList.remove('on'))},
+      async play(s,id){await wait(350,id);
+        for(let t=0;t<6;t++){show(rnn.words[t]);await wait(220,id);show(rnn.ins[t]);if(t>0)show(rnn.recs[t-1]);
+          rnn.cells.forEach((c,i)=>c.classList.toggle('on',i===t));rnn.bars[t].style.transform='scaleX('+rnn.share[t]+')';await wait(t===2?850:600,id)}
+        show(rnn.out);await wait(900,id);rnn.cells.forEach(c=>c.classList.remove('on'));
+        for(const g of rnn.grad){show(g);await wait(450,id)}
+        show(rnn.gradLabel);await wait(600,id);show(rnn.cap1);await wait(500,id);show(rnn.cap2)}},
+    s3:{
+      reset(s){[...lstm.w,...lstm.ins,...lstm.hs,lstm.out].forEach(hide);lstm.cells.forEach(c=>c.classList.remove('on'));lcard(s,null);
+        moveTo(lstm.F,132,172);moveTo(lstm.P,272,172);moveTo(lstm.S,412,172);[lstm.F,lstm.P,lstm.S].forEach(hide)},
+      final:lstmFinal,
+      async play(s,id){const L=lstm,F=L.F,P=L.P,S=L.S;
+        const step=t=>{show(L.w[t]);show(L.ins[t]);if(t>0)show(L.hs[t-1]);L.cells.forEach((c,i)=>c.classList.toggle('on',i===t))};
+        await wait(350,id);
+        step(0);await wait(450,id);show(F);flash(L.in[0]);lcard(s,'i');await wait(200,id);moveTo(F,132,71);await wait(950,id);
+        moveTo(F,205,71);await wait(900,id);
+        step(1);flash(L.fn[1]);lcard(s,'f');moveTo(F,300,71);await wait(700,id);
+        show(P);flash(L.in[1]);lcard(s,'i');moveTo(P,272,90);await wait(950,id);moveTo(F,340,71);moveTo(P,340,90);await wait(900,id);
+        step(2);flash(L.fn[2]);lcard(s,'f');moveTo(F,440,71);moveTo(P,362,90);hide(P);await wait(800,id);
+        show(S);flash(L.in[2]);lcard(s,'i');moveTo(S,412,90);await wait(950,id);moveTo(F,480,71);moveTo(S,480,90);await wait(900,id);
+        step(3);flash(L.fn[3]);lcard(s,'f');moveTo(F,596,71);moveTo(S,596,90);await wait(1000,id);
+        lcard(s,'o');show(L.out);await wait(1800,id);lcard(s,null);L.cells.forEach(c=>c.classList.remove('on'))}},
+    s4:{
+      reset(){hide(attn.pulse);attn.pulse.style.opacity='';moveTo(attn.pulse,270,30);attn.arcs.forEach(a=>a.style.strokeDashoffset=1);[...attn.wl,attn.hop,attn.direct].forEach(hide);attn.toks[2].setAttribute('fill','#e9e3da')},
+      final:attnFinal,
+      async play(s,id){await wait(400,id);show(attn.pulse);attn.pulse.style.opacity=1;await wait(500,id);
+        for(const [x,o] of [[374,.75],[478,.5],[582,.35]]){moveTo(attn.pulse,x,30);attn.pulse.style.opacity=o;await wait(750,id)}
+        show(attn.hop);await wait(900,id);
+        attn.arcs.forEach(a=>a.style.strokeDashoffset=0);await wait(1200,id);
+        attn.wl.forEach(show);attn.toks[2].setAttribute('fill','#f1e4d9');await wait(500,id);show(attn.direct)}}
+  };
+  function startAnim(slide){
+    runId++;const id=runId,a=anims[slide.id];if(!a)return;
+    if(reduceMotion){a.final(slide);return}
+    slide.classList.add('noanim');a.reset(slide);void slide.getBoundingClientRect();slide.classList.remove('noanim');
+    a.play(slide,id).catch(()=>{});
+  }
+  document.querySelectorAll('.replay').forEach(b=>b.addEventListener('click',()=>startAnim(b.closest('.slide'))));
+
   let index=Math.max(0,slides.findIndex(s=>'#'+s.id===location.hash));
   if(index<0) index=0;
   function eligible(){return slides.filter(s=>owner==='all'||s.dataset.owner===owner)}
@@ -562,6 +729,7 @@ svg text{font-family:Arial,Helvetica,sans-serif}
     noteText.textContent=current.dataset.note||'';
     history.replaceState(null,'',location.pathname+(owner==='all'?'':'?integrante='+owner)+'#'+current.id);
     document.title='Lost in the Middle · Slide '+(index+1)+' · Integrante '+current.dataset.owner;
+    if(current.id!==shownId){shownId=current.id;startAnim(current)}
   }
   function move(step){const v=eligible(),i=v.indexOf(slides[index]);if(v[i+step]){index=slides.indexOf(v[i+step]);render()}}
   prev.addEventListener('click',()=>move(-1));next.addEventListener('click',()=>move(1));
@@ -573,6 +741,7 @@ svg text{font-family:Arial,Helvetica,sans-serif}
     if(ev.key==='ArrowRight'||ev.key==='PageDown'||ev.key===' '){ev.preventDefault();move(1)}
     if(ev.key==='ArrowLeft'||ev.key==='PageUp'){ev.preventDefault();move(-1)}
     if(ev.key.toLowerCase()==='n')notes.classList.toggle('show');
+    if(ev.key.toLowerCase()==='r')startAnim(slides[index]);
     if(ev.key.toLowerCase()==='f'){if(!document.fullscreenElement)stage.requestFullscreen?.();else document.exitFullscreen?.()}
   });
   const docDemo=document.getElementById('documentDemo');
